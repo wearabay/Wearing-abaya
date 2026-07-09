@@ -1,53 +1,85 @@
+import {
+  Gem,
+  Scissors,
+  Globe,
+  RefreshCcw,
+} from "lucide-react";
+
+import Container from "../ui/Container";
+import SectionTitle from "../ui/SectionTitle";
+
 const values = [
   {
+    icon: Gem,
     title: "Premium Fabric",
-    text: "Selected fabrics with exceptional comfort and graceful drape.",
+    description:
+      "Carefully selected materials that combine elegance, comfort and durability.",
   },
   {
-    title: "Timeless Design",
-    text: "Elegant silhouettes designed beyond seasonal trends.",
+    icon: Scissors,
+    title: "Handcrafted Detail",
+    description:
+      "Every piece is finished with refined craftsmanship and meticulous attention.",
   },
   {
-    title: "Craftsmanship",
-    text: "Every detail is finished with precision and care.",
+    icon: Globe,
+    title: "Worldwide Shipping",
+    description:
+      "Delivering timeless modest fashion to customers around the world.",
+  },
+  {
+    icon: RefreshCcw,
+    title: "Easy Returns",
+    description:
+      "Enjoy a simple and worry-free shopping experience with flexible returns.",
   },
 ];
 
 export default function BrandValues() {
   return (
-    <section className="py-24 bg-white border-y text-neutral-500">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-24 lg:py-24">
+      <Container>
 
-        <div className="text-center mb-16">
-          <p className="uppercase tracking-[0.35em] text-sm text-gray-500">
-            Our Philosophy
-          </p>
+        <SectionTitle
+          eyebrow="Our Values"
+          title="Luxury Is Found In Every Detail"
+          description="Every Wearing Abaya piece is created with quality, craftsmanship and timeless elegance."
+        />
 
-          <h2 className="text-4xl font-light text-neutral-900 mt-3">
-            Designed To Last
-          </h2>
+        <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 text-neutral-700">
+
+          {values.map((value) => {
+            const Icon = value.icon;
+
+            return (
+              <div
+                key={value.title}
+                className="group text-center"
+              >
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-neutral-200 transition-all duration-300 group-hover:border-black">
+
+                  <Icon
+                    size={26}
+                    strokeWidth={1.5}
+                  />
+
+                </div>
+
+                <h3 className="mt-8 text-xl font-light text-neutral-900">
+                  {value.title}
+                </h3>
+
+                <p className="mt-4 leading-8 text-neutral-500">
+                  {value.description}
+                </p>
+
+              </div>
+            );
+          })}
+
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12">
-          {values.map((item) => (
-            <div
-              key={item.title}
-              className="text-center"
-            >
-              <div className="w-14 h-14 rounded-full border mx-auto mb-6"></div>
-
-              <h3 className="text-xl mb-4">
-                {item.title}
-              </h3>
-
-              <p className="text-gray-600 leading-7">
-                {item.text}
-              </p>
-            </div>
-          ))}
-        </div>
-
-      </div>
+      </Container>
     </section>
   );
 }

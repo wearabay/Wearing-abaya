@@ -13,19 +13,18 @@ export default function SectionTitle({
 }: SectionTitleProps) {
   return (
     <div
-      className={align === "center" ? "text-center" : "text-left"}
+      className={`${
+        align === "center" ? "text-center mx-auto" : "text-left"
+      } max-w-3xl`}
     >
       {eyebrow && (
         <p
           className="
-            text-xs
+            text-[11px]
             font-medium
             uppercase
-            tracking-[0.30em]
-            text-neutral-700
-
-            lg:text-sm
-            lg:tracking-[0.35em]
+            tracking-[0.38em]
+            text-neutral-500
           "
         >
           {eyebrow}
@@ -34,15 +33,13 @@ export default function SectionTitle({
 
       <h2
         className="
-          mt-4
-          text-3xl
-          font-normal
+          mt-5
+          text-4xl
+          font-light
           leading-tight
-          text-neutral-700
-
-          sm:text-4xl
-          lg:text-5xl
-          lg:font-light
+          tracking-[0.02em]
+          text-neutral-900
+          md:text-5xl
         "
       >
         {title}
@@ -52,11 +49,11 @@ export default function SectionTitle({
         <p
           className="
             mx-auto
-            mt-6
+            mt-7
             max-w-2xl
             text-base
             leading-8
-            text-neutral-600
+            text-neutral-500
           "
         >
           {description}

@@ -1,59 +1,124 @@
+import Link from "next/link";
+import Image from "next/image";
+
 import Container from "../ui/Container";
 import SectionTitle from "../ui/SectionTitle";
 
+const collections = [
+  {
+    title: "Abaya",
+    description: "Elegant everyday luxury",
+    image: "/images/products/abaya-07.jpg",
+    href: "/shop?category=abaya",
+  },
+  {
+    title: "Dress",
+    description: "Modern modest fashion",
+    image: "/images/products/abaya-08.jpg",
+    href: "/shop?category=dress",
+  },
+  {
+    title: "Mukena",
+    description: "Premium prayer collection",
+    image: "/images/products/abaya-10.jpg",
+    href: "/shop?category=mukena",
+  },
+];
+
 export default function FeaturedCollections() {
-  const collections = [
-    {
-      title: "Abaya",
-      description: "Elegant everyday luxury",
-    },
-    {
-      title: "Dress",
-      description: "Modern modest fashion",
-    },
-    {
-      title: "Mukena",
-      description: "Premium prayer collection",
-    },
-    {
-      title: "Kids",
-      description: "Elegant for little ones",
-    },
-  ];
-
   return (
-    <section className="bg-[#FAF8F5] py-15 lg:py-24">
+    <section className="bg-[#FAF8F5] py-24 lg:py-32">
       <Container>
+        <div className="mx-auto mb-20 max-w-3xl text-center">
 
-        <SectionTitle
-  eyebrow="Collections"
-  title="Discover Our Collections"
-/>
+          <SectionTitle
+            eyebrow="Shop by Collection"
+            title="Discover Our Collections"
+          />
 
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8">
-
-          {collections.map((item) => (
-            <div
-              key={item.title}
-              className="group cursor-pointer transition-transform duration-300"
-            >
-
-              <div className="aspect-[3/4] overflow-hidden rounded-x1 bg-[#ECE8E2] transition duration-500 group-hover:scale-[1.03]">
-              </div>
-
-              <h3 className="mt-5 text-lg font-medium tracking-[0.05em] text-neutral-900 lg:mt-6 lg:text-xl">
-                {item.title}
-              </h3>
-
-              <p className="mt-2 text-sm leading-6 text-neutral-600">
-                {item.description}
-              </p>
-
-            </div>
-          ))}
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-neutral-600">
+            Discover timeless pieces crafted with elegance for every
+            occasion, from everyday essentials to exclusive collections.
+          </p>
 
         </div>
 
+        <div className="grid gap-8 lg:grid-cols-3">
+
+          {collections.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="group block"
+            >
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
+
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width:768px) 100vw, 33vw"
+                  className="
+                    object-cover
+                    transition-all
+                    duration-700
+                    group-hover:scale-105
+                  "
+                />
+
+                <div
+                  className="
+                    absolute
+                    inset-0
+                    bg-gradient-to-t
+                    from-black/65
+                    via-black/15
+                    to-transparent
+                    transition-all
+                    duration-500
+                    group-hover:from-black/75
+                  "
+                />
+
+                <div
+                  className="
+                    absolute
+                    bottom-8
+                    left-8
+                    text-white
+                    transition-all
+                    duration-500
+                    group-hover:-translate-y-2
+                  "
+                >
+                  <h3 className="text-3xl font-light tracking-wide">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 max-w-xs text-sm leading-6 text-white/85">
+                    {item.description}
+                  </p>
+
+                  <span
+                    className="
+                      mt-7
+                      inline-flex
+                      items-center
+                      gap-2
+                      text-[11px]
+                      uppercase
+                      tracking-[0.28em]
+                    "
+                  >
+                    Shop Now →
+                  </span>
+                </div>
+
+              </div>
+            </Link>
+          ))}
+
+        </div>
       </Container>
     </section>
   );

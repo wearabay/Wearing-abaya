@@ -1,33 +1,121 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import Container from "../ui/Container";
+import SectionTitle from "../ui/SectionTitle";
+
 export default function JournalSection() {
   return (
-    <section className="py-28 bg-[#f7f5f2]">
-      <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="bg-[#FAF8F5] py-20 lg:py-28">
+      <Container>
 
-        <div className="aspect-[4/5] bg-[#d9d6cf]" />
+        <SectionTitle
+          eyebrow="Journal"
+          title="Stories Behind The Collection"
+          description="Discover inspiration, craftsmanship and timeless modest fashion."
+        />
 
-        <div>
-          <p className="uppercase tracking-[0.35em] text-sm text-gray-500">
-            Journal
-          </p>
+        <div className="mt-16 grid gap-8 lg:grid-cols-2">
 
-          <h2 className="text-5xl font-light text-black mt-5 leading-tight">
-            Crafting Timeless
-            <br />
-            Modest Luxury
-          </h2>
+          {/* Featured Article */}
+          <Link
+            href="/journal"
+            className="group overflow-hidden rounded-2xl bg-white"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden">
+              <Image
+                src="/images/journal/journal-01.jpg"
+                alt="Journal"
+                fill
+                className="object-cover transition duration-700 group-hover:scale-105"
+              />
+            </div>
 
-          <p className="mt-8 text-gray-600 leading-8">
-            Every Wearing Abaya piece is designed with refined
-            silhouettes, premium fabrics and meticulous craftsmanship.
-            Our philosophy celebrates elegance that transcends trends.
-          </p>
+            <div className="p-8">
+              <p className="text-xs uppercase tracking-[0.30em] text-neutral-500">
+                Editorial
+              </p>
 
-          <button className="mt-10 border border-black px-10 py-4 text-neutral-900 uppercase tracking-[0.25em] hover:bg-black hover:text-white transition">
-            Read Journal
-          </button>
+              <h3 className="mt-3 text-3xl font-light text-neutral-900">
+                The Art of Modern Modesty
+              </h3>
+
+              <p className="mt-5 leading-8 text-neutral-600">
+                Every Wearing Abaya piece is crafted with premium fabrics,
+                elegant silhouettes and timeless details designed for women
+                who appreciate understated luxury.
+              </p>
+
+              <span className="mt-8 inline-block uppercase tracking-[0.25em] text-sm transition group-hover:translate-x-2">
+                Read Story →
+              </span>
+            </div>
+          </Link>
+
+          {/* Side Articles */}
+          <div className="grid gap-8">
+
+            <Link
+              href="/journal"
+              className="group flex overflow-hidden rounded-2xl bg-white"
+            >
+              <div className="relative w-40 shrink-0">
+                <Image
+                  src="/images/journal/journal-02.jpg"
+                  alt=""
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center p-6">
+                <p className="text-xs uppercase tracking-[0.30em] text-neutral-500">
+                  Craftsmanship
+                </p>
+
+                <h3 className="mt-3 text-xl font-light">
+                  Handmade Finishing
+                </h3>
+
+                <span className="mt-5 text-sm uppercase tracking-[0.25em] group-hover:translate-x-2 transition">
+                  Read →
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/journal"
+              className="group flex overflow-hidden rounded-2xl bg-white"
+            >
+              <div className="relative w-40 shrink-0">
+                <Image
+                  src="/images/journal/journal-03.jpg"
+                  alt=""
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center p-6">
+                <p className="text-xs uppercase tracking-[0.30em] text-neutral-500">
+                  Collection
+                </p>
+
+                <h3 className="mt-3 text-xl font-light">
+                  Autumn 2026 Preview
+                </h3>
+
+                <span className="mt-5 text-sm uppercase tracking-[0.25em] group-hover:translate-x-2 transition">
+                  Read →
+                </span>
+              </div>
+            </Link>
+
+          </div>
+
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }
