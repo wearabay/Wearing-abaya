@@ -1,16 +1,22 @@
 import Link from "next/link";
 
-export default function Logo() {
+type LogoProps = {
+  dark?: boolean;
+};
+
+export default function Logo({ dark = false }: LogoProps) {
   return (
     <Link
       href="/"
-      className="flex flex-col leading-none"
+      className={`flex flex-col leading-none transition-colors duration-500 ${
+        dark ? "text-neutral-900" : "text-white"
+      }`}
     >
-      <span className="text-2xl font-semibold tracking-[0.15em]">
+      <span className="text-2xl font-light tracking-[0.18em]">
         WEARING
       </span>
 
-      <span className="text-xs uppercase tracking-[0.6em]">
+      <span className="text-[11px] uppercase tracking-[0.65em]">
         ABAYA
       </span>
     </Link>

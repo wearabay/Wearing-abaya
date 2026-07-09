@@ -12,12 +12,13 @@ export default function Hero() {
     alt="Wearing Abaya Hero"
     fill
     priority
-    className="object-cover"
+    sizes="100vw"
+    className="object-cover animate-hero"
   />
 </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/25" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/20 to-black/45" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
@@ -26,13 +27,13 @@ export default function Hero() {
           Premium Modest Fashion
         </p>
 
-        <h1 className="text-6xl font-light tracking-[0.25em]">
+        <h1 className="text-5xl md:text-7xl xl:text-8xl font-light tracking-[0.25em]">
           WEARING ABAYA
         </h1>
 
-        <p className="mt-8 max-w-xl text-center text-lg opacity-90">
-          Timeless elegance crafted for the modern woman.
-        </p>
+        <p className="mt-8 max-w-2xl text-lg md:text-xl font-light leading-8 text-white/90">
+  Timeless elegance crafted for the modern woman.
+</p>
 
         <div className="mt-10">
   <Button href="/shop" variant="outline">
@@ -41,6 +42,16 @@ export default function Hero() {
 </div>
 
       </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+  <div className="flex flex-col items-center gap-2">
+    <span className="text-[10px] tracking-[0.4em] uppercase text-white/80">
+      Scroll
+    </span>
+
+    <div className="h-10 w-[1px] bg-white/70 animate-pulse" />
+  </div>
+</div>
 
     </section>
   );

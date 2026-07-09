@@ -15,7 +15,7 @@ export default function ProductImage({
   product,
 }: Props) {
   return (
-    <div className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-[#ECE8E2] transition-all duration-500 group-hover:shadow-xl">
+    <div className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-[#ECE8E2] transition-all duration-500">
 
       {product.badge && (
         <div className="absolute left-4 top-4 z-20">
@@ -54,7 +54,7 @@ export default function ProductImage({
     transition-all
     duration-700
     group-hover:opacity-100
-    group-hover:scale-105
+    group-hover:scale-[1.03]
   "
 />
 
@@ -65,12 +65,13 @@ export default function ProductImage({
     bottom-0
     h-24
     bg-gradient-to-t
-    from-black/20
+    from-black/30
     to-transparent
     opacity-0
     transition
     duration-500
     group-hover:opacity-100
+    group-hover:scale-[1.03]
   "
 />
 
@@ -86,10 +87,12 @@ export default function ProductImage({
     left-1/2
     -translate-x-1/2
     rounded-full
-    bg-white
-    px-7
-    py-3
+    bg-white/95
+    backdrop-blur-sm
+    px-8
+    py-3.5
     text-[11px]
+    font-medium
     tracking-[0.22em]
     shadow-lg
     opacity-0

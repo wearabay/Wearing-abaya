@@ -8,11 +8,13 @@ import { getWishlistCount } from "@/lib/wishlist";
 import { getCartCount } from "@/lib/cart";
 
 type NavbarIconsProps = {
+  dark?: boolean;
   onCartClick: () => void;
   onSearchClick: () => void;
 };
 
 export default function NavbarIcons({
+  dark = false,
   onCartClick,
   onSearchClick,
 }: NavbarIconsProps) {
@@ -20,6 +22,7 @@ export default function NavbarIcons({
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
+    
     const updateWishlist = () => {
       setWishlistCount(getWishlistCount());
     };
@@ -42,6 +45,8 @@ export default function NavbarIcons({
     };
   }, []);
 
+  const iconClass =`transition-all duration-300 hover:opacity-60 ${ dark? "text-neutral-900" : "text-white"}`;
+  
   return (
     <div className="flex items-center gap-6">
 
@@ -50,10 +55,10 @@ export default function NavbarIcons({
   type="button"
   onClick={onSearchClick}
   aria-label="Search"
-  className="transition duration-300 hover:opacity-60"
+  className={iconClass}
 >
   <Search
-    size={20}
+    size={22}
     strokeWidth={1.8}
   />
 </button>
@@ -61,13 +66,13 @@ export default function NavbarIcons({
       {/* WISHLIST */}
       <Link
         href="/wishlist"
-        className="relative transition hover:opacity-60"
+        className={`relative ${iconClass}`}
         aria-label="Wishlist"
       >
-        <Heart size={20} strokeWidth={1.8} />
+        <Heart size={22} strokeWidth={1.8} />
 
         {wishlistCount > 0 && (
-          <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] font-medium text-white">
+          <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-neutral-900 ring-2 ring-white text-[10px] font-semibold text-white">
             {wishlistCount}
           </span>
         )}
@@ -77,13 +82,13 @@ export default function NavbarIcons({
       <button
         type="button"
         onClick={onCartClick}
-        className="relative transition hover:opacity-60"
+        className={`relative ${iconClass}`}
         aria-label="Shopping Bag"
       >
-        <ShoppingBag size={20} strokeWidth={1.8} />
+        <ShoppingBag size={22} strokeWidth={1.8} />
 
         {cartCount > 0 && (
-          <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] font-medium text-white">
+          <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-neutral-900 ring-2 ring-white text-[10px] font-semibold text-white">
             {cartCount}
           </span>
         )}

@@ -6,19 +6,34 @@ export default function FeaturedProducts() {
 
   return (
   <>
-    <section className="py-15 bg-white">
+    <section className="bg-white py-16 lg:py-32">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="uppercase tracking-[0.35em] text-sm text-gray-500">
-            New Arrivals
+        <div className="mx-auto mb-20 max-w-3xl text-center">
+          <p className="uppercase tracking-[0.35em] text-[11px] text-gray-500">
+            Featured Collection
           </p>
 
-          <h2 className="text-4xl font-light text-neutral-900 mt-4">
+          <h2 className="mt-5 text-4xl font-light tracking-[0.02em] text-neutral-900 md:text-5xl">
             Featured Products
           </h2>
+
+          <p
+  className="mx-auto mt-4 max-w-xl text-base leading-8 text-neutral-500"
+>
+  Carefully selected pieces designed for timeless elegance and effortless sophistication.
+</p>
+
+<div className="mt-6">
+  <a
+    href="/shop"
+    className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.28em] text-neutral-900 transition hover:opacity-60"
+  >
+    View All Collection →
+  </a>
+</div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-neutral-900">
+        <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-14 text-neutral-900">
           {products.map((product) => (
             <ProductCard
               key={product.id}

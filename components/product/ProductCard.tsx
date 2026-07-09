@@ -14,19 +14,38 @@ export default function ProductCard({
   return (
     <Link
       href={`/shop/${product.slug}`}
-      className="group block cursor-pointer transition duration-300 hover:-translate-y-1"
+      className="
+        group
+        block
+        rounded-2xl
+        transition-all
+        duration-500
+        hover:-translate-y-2
+      "
     >
       <ProductImage product={product} />
 
-      <div className="mt-5">
-        <h3 className="text-lg font-light">
+      <div className="mt-5 space-y-2">
+
+        <h3
+          className="
+            line-clamp-2
+            text-[17px]
+            font-light
+            leading-relaxed
+            tracking-[0.01em]
+            text-neutral-900
+          "
+        >
           {product.name}
         </h3>
 
         <ProductPrice
           price={product.price}
         />
+
       </div>
+
     </Link>
   );
 }
