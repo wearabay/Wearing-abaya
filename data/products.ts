@@ -11,7 +11,7 @@ export const products: Product[] = [
   image: "/images/products/abaya-01.jpg",
 
   images: [
-    "/images/products/abaya-02.jpg",
+    "/images/products/abaya-01.jpg",
     "/images/products/abaya-03.jpg",
     "/images/products/abaya-04.jpg",
     "/images/products/abaya-05.jpg",
@@ -65,7 +65,7 @@ sizes: [
   image: "/images/products/abaya-07.jpg",
 
   images: [
-    "/images/products/abaya-05.jpg",
+    "/images/products/abaya-07.jpg",
     "/images/products/abaya-08.jpg",
     "/images/products/abaya-09.jpg",
     "/images/products/abaya-10.jpg",
@@ -119,9 +119,9 @@ sizes: [
   image: "/images/products/abaya-09.jpg",
 
   images: [
-    "/images/products/abaya-06.jpg",
-    "/images/products/abaya-08.jpg",
     "/images/products/abaya-09.jpg",
+    "/images/products/abaya-08.jpg",
+    "/images/products/abaya-06.jpg",
     "/images/products/abaya-10.jpg",
   ],
   description:
@@ -173,7 +173,7 @@ sizes: [
   image: "/images/products/abaya-08.jpg",
 
   images: [
-    "/images/products/abaya-02.jpg",
+    "/images/products/abaya-08.jpg",
     "/images/products/abaya-03.jpg",
     "/images/products/abaya-04.jpg",
     "/images/products/abaya-05.jpg",

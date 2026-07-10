@@ -21,8 +21,8 @@ export interface Product {
     value: string;
   }[];
 
-  colors?: string[];
-  sizes?: string[];
+  colors: string[];
+  sizes: string[];
 
-  stock?: number;
+  stock: number;
 }

@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+import { ShopProvider } from "@/components/shop/context/ShopContext";
 import ShopHeader from "@/components/shop/ShopHeader";
 import ShopToolbar from "@/components/shop/ShopToolbar";
 import ProductGrid from "@/components/shop/ProductGrid";
@@ -10,19 +11,15 @@ export default function ShopPage() {
     <>
       <Navbar />
 
-      <main className="bg-white">
+      <ShopProvider>
 
-        <ShopHeader />
-
-        <section className="mx-auto max-w-7xl px-6 pb-24 text-neutral-600">
-
+        <main>
+          <ShopHeader />
           <ShopToolbar />
-
           <ProductGrid />
+        </main>
 
-        </section>
-
-      </main>
+      </ShopProvider>
 
       <Footer />
     </>

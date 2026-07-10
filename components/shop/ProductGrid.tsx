@@ -1,42 +1,87 @@
+"use client";
+
 import ProductCard from "../product/ProductCard";
 import Container from "../ui/Container";
 
 import { products } from "@/data/products";
 
+import { useShop } from "./context/ShopContext";
+
 export default function ProductGrid() {
-  if (products.length === 0) {
+  const { search, sort, category, colors, sizes } = useShop();
+
+  let filteredProducts = [...products];
+
+  // Search
+  if (search.trim()) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
+  // Category Filter
+
+  if (category.length > 0) {
+  filteredProducts = filteredProducts.filter((product) =>
+    category.includes(product.category)
+  );
+}
+// Color Filter
+
+  if (colors.length > 0) {
+  filteredProducts = filteredProducts.filter((product) =>
+    product.colors.some((color) => colors.includes(color))
+  );
+}
+if (sizes.length > 0) {
+  filteredProducts = filteredProducts.filter(
+    (product) =>
+      product.sizes.some((size) =>
+        sizes.includes(size)
+      )
+  );
+}
+
+  // Sort
+  switch (sort) {
+    case "low-high":
+      filteredProducts.sort((a, b) => a.price - b.price);
+      break;
+
+    case "high-low":
+      filteredProducts.sort((a, b) => b.price - a.price);
+      break;
+
+    case "name-asc":
+      filteredProducts.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      break;
+
+    case "name-desc":
+      filteredProducts.sort((a, b) =>
+        b.name.localeCompare(a.name)
+      );
+      break;
+
+    default:
+      break;
+  }
+
+  if (filteredProducts.length === 0) {
     return (
       <section className="py-24">
         <Container>
 
           <div className="text-center">
 
-            <h2 className="text-3xl font-light text-neutral-900">
+            <h2 className="text-3xl font-light">
               No Products Found
             </h2>
 
-            <p className="mt-5 text-neutral-500">
-              Try another keyword or clear your filters.
+            <p className="mt-4 text-neutral-500">
+              Try another keyword.
             </p>
-
-            <button
-              className="
-                mt-8
-                rounded-full
-                border
-                border-black
-                px-8
-                py-3
-                text-xs
-                uppercase
-                tracking-[0.25em]
-                transition
-                hover:bg-black
-                hover:text-white
-              "
-            >
-              Clear Filters
-            </button>
 
           </div>
 
@@ -47,42 +92,34 @@ export default function ProductGrid() {
 
   return (
     <section className="py-14 lg:py-16">
+
       <Container>
 
-        {/* Product Count */}
-
-        <div className="mb-10 flex items-center justify-between">
+        <div className="mb-10">
 
           <p className="text-sm text-neutral-500">
             Showing{" "}
             <span className="font-medium text-neutral-900">
-              {products.length}
+              {filteredProducts.length}
             </span>{" "}
             Products
           </p>
 
         </div>
 
-        {/* Grid */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-14 lg:grid-cols-4">
 
-        <div
-          className="
-            grid
-            grid-cols-2
-            gap-x-8
-            gap-y-14
-            lg:grid-cols-4
-          "
-        >
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
             />
           ))}
+
         </div>
 
       </Container>
+
     </section>
   );
 }

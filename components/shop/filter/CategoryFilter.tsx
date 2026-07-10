@@ -1,20 +1,46 @@
+"use client";
+
 import { categories } from "@/data/categories";
+import { useShop } from "../context/ShopContext";
 
 export default function CategoryFilter() {
+  const { category, setCategory } = useShop();
+
+  function toggleCategory(name: string) {
+    if (category.includes(name)) {
+      setCategory(category.filter((item) => item !== name));
+    } else {
+      setCategory([...category, name]);
+    }
+  }
+
   return (
     <div className="flex flex-wrap gap-3">
+      {categories.map((item) => {
+        const active = category.includes(item.name);
 
-      {categories.map((category) => (
-
-        <button
-          key={category.id}
-          className="rounded-full border px-5 py-2 text-sm transition hover:bg-black hover:text-white"
-        >
-          {category.name}
-        </button>
-
-      ))}
-
+        return (
+          <button
+            key={item.id}
+            onClick={() => toggleCategory(item.name)}
+            className={`
+              rounded-full
+              border
+              px-5
+              py-2
+              text-sm
+              transition
+              ${
+                active
+                  ? "bg-black text-white border-black"
+                  : "border-neutral-300 hover:bg-black hover:text-white"
+              }
+            `}
+          >
+            {item.name}
+          </button>
+        );
+      })}
     </div>
   );
 }

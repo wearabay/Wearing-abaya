@@ -1,21 +1,29 @@
-type InputProps = {
-  placeholder?: string;
-  type?: string;
-};
+import { InputHTMLAttributes } from "react";
+
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
 export default function Input({
-  placeholder,
-  type = "text",
+  className = "",
+  ...props
 }: InputProps) {
   return (
     <input
       suppressHydrationWarning
-      type={type}
-      placeholder={placeholder}
       autoComplete="off"
       spellCheck={false}
       autoCapitalize="none"
-      className="w-full border border-neutral-300 px-5 py-4 outline-none focus:border-black"
+      className={`
+        w-full
+        border
+        border-neutral-300
+        px-5
+        py-4
+        outline-none
+        transition
+        focus:border-black
+        ${className}
+      `}
+      {...props}
     />
   );
 }

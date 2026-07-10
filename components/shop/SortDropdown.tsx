@@ -2,12 +2,17 @@
 
 import { ChevronDown } from "lucide-react";
 
+import { useShop } from "./context/ShopContext";
+
 export default function SortDropdown() {
+  const { sort, setSort } = useShop();
+
   return (
     <div className="relative">
 
       <select
-        defaultValue="newest"
+        value={sort}
+        onChange={(e) => setSort(e.target.value)}
         className="
           h-12
           appearance-none
@@ -46,8 +51,12 @@ export default function SortDropdown() {
           Price: High to Low
         </option>
 
-        <option value="name">
-          Alphabetically
+        <option value="name-asc">
+          Name: A - Z
+        </option>
+
+        <option value="name-desc">
+          Name: Z - A
         </option>
 
       </select>
