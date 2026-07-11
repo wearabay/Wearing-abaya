@@ -29,7 +29,7 @@ const hasActiveFilters =
   sizes.length > 0;
 
   return (
-    <section className="sticky top-20 z-30 border-b border-neutral-200 bg-white/95 backdrop-blur-md">
+    <section className="sticky top-20 z-30 border-b border-neutral-200/80 bg-white/90 backdrop-blur-mx text-neutral-700">
 
       <Container>
 

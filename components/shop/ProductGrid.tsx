@@ -91,7 +91,7 @@ if (sizes.length > 0) {
   }
 
   return (
-    <section className="py-14 lg:py-16">
+    <section className="py-10 lg:py-8">
 
       <Container>
 
@@ -99,7 +99,7 @@ if (sizes.length > 0) {
 
           <p className="text-sm text-neutral-500">
             Showing{" "}
-            <span className="font-medium text-neutral-900">
+            <span className="font-medium text-neutral-500">
               {filteredProducts.length}
             </span>{" "}
             Products

@@ -34,7 +34,7 @@ export default function ProductCard({
             font-light
             leading-relaxed
             tracking-[0.01em]
-            text-neutral-900
+            text-neutral-500
           "
         >
           {product.name}

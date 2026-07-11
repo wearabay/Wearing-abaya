@@ -19,7 +19,6 @@ export default function SortDropdown() {
           rounded-full
           border
           border-neutral-300
-          bg-white
           pl-5
           pr-12
           text-xs

@@ -49,24 +49,56 @@ export default function ProductLightbox({
         {/* Previous */}
 
         <button
-          type="button"
-          aria-label="Previous image"
-          onClick={onPrevious}
-          className="absolute left-2 top-1/2 z-50 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white backdrop-blur transition hover:bg-black/70"
-        >
-          <ChevronLeft size={32} />
-        </button>
+  type="button"
+  aria-label="Previous image"
+  onClick={onPrevious}
+  className="
+    hidden xl:flex
+    absolute
+    left-2
+    top-1/2
+    z-50
+    -translate-y-1/2
+    items-center
+    justify-center
+    rounded-full
+    bg-black/50
+    p-3
+    text-white
+    backdrop-blur
+    transition
+    hover:bg-black/70
+  "
+>
+  <ChevronLeft size={32} />
+</button>
 
         {/* Next */}
 
         <button
-          type="button"
-          aria-label="Next image"
-          onClick={onNext}
-          className="absolute right-2 top-1/2 z-50 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white backdrop-blur transition hover:bg-black/70"
-        >
-          <ChevronRight size={32} />
-        </button>
+  type="button"
+  aria-label="Next image"
+  onClick={onNext}
+  className="
+    hidden xl:flex
+    absolute
+    right-2
+    top-1/2
+    z-50
+    -translate-y-1/2
+    items-center
+    justify-center
+    rounded-full
+    bg-black/50
+    p-3
+    text-white
+    backdrop-blur
+    transition
+    hover:bg-black/70
+  "
+>
+  <ChevronRight size={32} />
+</button>
 
         {/* Image */}
 

@@ -1,41 +1,56 @@
+import Image from "next/image";
+
 import Container from "../ui/Container";
-import SectionTitle from "../ui/SectionTitle";
 
 export default function ShopHeader() {
   return (
-    <section className="border-b border-neutral-200 bg-[#FAF8F5] py-20 lg:py-24">
-      <Container>
+      <section className="relative overflow-hidden border-b border-neutral-200 py-32 lg:py-24">
 
-        <SectionTitle
-          eyebrow="Collection"
-          title="Shop"
-          description="Discover timeless modest fashion crafted with premium fabrics, elegant silhouettes and refined craftsmanship."
+      {/* Background */}
+
+      <div className="absolute inset-0">
+
+        <Image
+          src="/images/shop/shop-header.jpg"
+          alt="Shop Collection"
+          fill
+          priority
+          className="object-cover"
         />
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 text-sm text-neutral-500 md:flex-row md:gap-10">
+      </div>
 
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-neutral-900" />
-            Premium Quality
-          </div>
+      {/* Overlay */}
 
-          <div className="hidden h-4 w-px bg-neutral-300 md:block" />
+      <div className="absolute inset-0 bg-black/35" />
 
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-neutral-900" />
-            Worldwide Shipping
-          </div>
+      {/* Content */}
 
-          <div className="hidden h-4 w-px bg-neutral-300 md:block" />
+      <Container>
 
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-neutral-900" />
-            New Collection
+        <div className="relative flex h-[220px] items-center justify-center text-center lg:h-[320px]">
+
+          <div>
+
+            <p className="text-xs uppercase tracking-[0.45em] text-white/80">
+              Collection
+            </p>
+
+            <h1 className="mt-5 text-4xl font-light tracking-[0.08em] text-white lg:text-6xl">
+              Discover Our Collection
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-white/85 lg:text-base">
+              Timeless pieces crafted with refined silhouettes,
+              premium fabrics, and exceptional attention to detail.
+            </p>
+
           </div>
 
         </div>
 
       </Container>
+
     </section>
   );
 }

@@ -17,7 +17,7 @@ export default function ProductDetails({
 }, [product.slug]);
 
   return (
-    <div className="mt-6">
+    <div className="mt-10 border-t border-neutral-200 pt-8">
 
       <ProductAccordion
         title="Description"
@@ -48,20 +48,42 @@ export default function ProductDetails({
         title="Shipping & Returns"
       >
         <p>
-          Worldwide shipping available.
-          Orders are processed within 1–3 business days.
+          • Worldwide shipping available
+</p>
+<p>
+• Processing time: 1–3 business days
+</p>
+<p>
+• Estimated delivery:
+  Indonesia: 2–5 days
+  International: 5–10 days
+</p>
+<p>
+• Easy 7-day return policy
         </p>
       </ProductAccordion>
 
       <ProductAccordion
         title="Care Instructions"
       >
+        <ul className="space-y-2 text-neutral-600">
+
+  <li>• Dry clean recommended</li>
+
+  <li>• Steam only</li>
+
+  <li>• Do not bleach</li>
+
+  <li>• Store on padded hanger</li>
+
+</ul>
+</ProductAccordion>
+<ProductAccordion
+        title="Craftsmanship"
+      >
         <p>
-          Dry clean recommended.
-          Steam only.
-          Do not bleach.
-          Store on padded hanger.
-        </p>
+          Every Wearing Abaya piece is handcrafted using premium fabrics and refined finishing techniques to ensure timeless elegance and exceptional quality.
+</p>
       </ProductAccordion>
 
     </div>

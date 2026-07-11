@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type ProductImageProps = {
   src: string;
@@ -39,18 +40,32 @@ export default function ProductImage({
       onMouseMove={handleMove}
       className="group relative aspect-[3/4] overflow-hidden rounded-sm bg-[#ECE8E2] cursor-zoom-in"
     >
-      <Image
-        key={src}
-        src={src}
-        alt={alt}
-        fill
-        priority
-        sizes="60vw"
-        className="object-cover transition-transform duration-300 group-hover:scale-200"
-        style={{
-          transformOrigin: `${zoom.x}% ${zoom.y}%`,
-        }}
-      />
+      <AnimatePresence mode="wait">
+
+  <motion.div
+    key={src}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.25 }}
+    className="absolute inset-0"
+  >
+
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      priority
+      sizes="60vw"
+      className="object-cover transition-transform duration-300 group-hover:scale-200"
+      style={{
+        transformOrigin: `${zoom.x}% ${zoom.y}%`,
+      }}
+    />
+
+  </motion.div>
+
+</AnimatePresence>
     </div>
   );
 }
