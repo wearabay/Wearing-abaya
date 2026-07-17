@@ -11,6 +11,7 @@ export interface Product {
 
   category: string;
   badge?: string;
+  
 
   features: string[];
 
@@ -22,7 +23,8 @@ export interface Product {
   }[];
 
   colors: string[];
-  sizes: string[];
+sizes: string[];
 
-  stock: number;
+stock: number;
+
 }

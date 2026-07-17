@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Product } from "@/types/product";
+import { RefObject } from "react";
 
 import ColorSelector from "./ColorSelector";
 import SizeSelector from "./SizeSelector";
@@ -18,6 +19,8 @@ type ProductVariantProps = {
   onIncrease: () => void;
   onDecrease: () => void;
   onAddToCart: () => void;
+
+  addToBagRef?: RefObject<HTMLButtonElement | null>;
 };
 
 export default function ProductVariant({
@@ -30,6 +33,7 @@ export default function ProductVariant({
   onIncrease,
   onDecrease,
   onAddToCart,
+addToBagRef,
 }: ProductVariantProps) {
   return (
     <div className="mt-10 mb-6 space-y-6">
@@ -71,6 +75,7 @@ export default function ProductVariant({
 
   {/* ADD TO BAG */}
   <button
+  ref={addToBagRef}
     onClick={onAddToCart}
     className="w-full h-14 bg-black text-white text-xs uppercase tracking-[0.25em] rounded-full transition hover:bg-neutral-900"
   >

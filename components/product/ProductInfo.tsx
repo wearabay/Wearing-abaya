@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+} from "react";
+import StickyAddToBag from "./StickyAddToBag";
 
 import type { Product } from "@/types/product";
+
 import { formatPrice } from "@/lib/currency";
 
 import Badge from "@/components/ui/Badge";
@@ -21,6 +27,12 @@ export default function ProductInfo({
   const [selectedColor, setSelectedColor] = useState(
     product.colors?.[0] ?? ""
   );
+
+  const addToBagRef =
+  useRef<HTMLButtonElement>(null);
+
+const [showSticky, setShowSticky] =
+  useState(false);
 
   const [selectedSize, setSelectedSize] = useState(
     product.sizes?.[0] ?? ""
@@ -53,6 +65,23 @@ export default function ProductInfo({
 
     window.dispatchEvent(new Event("cart-open"));
   };
+
+  useEffect(() => {
+  if (!addToBagRef.current) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      setShowSticky(!entry.isIntersecting);
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  observer.observe(addToBagRef.current);
+
+  return () => observer.disconnect();
+}, []);
 
   return (
     <div>
@@ -103,6 +132,7 @@ export default function ProductInfo({
       {/* Variant */}
 
       <ProductVariant
+  addToBagRef={addToBagRef}
         product={product}
         selectedColor={selectedColor}
         onColorChange={setSelectedColor}
@@ -113,6 +143,13 @@ export default function ProductInfo({
         onDecrease={decreaseQuantity}
         onAddToCart={handleAddToCart}
       />
+
+      <StickyAddToBag
+  visible={showSticky}
+  name={product.name}
+  price={product.price}
+  onAddToCart={handleAddToCart}
+/>
     </div>
   );
 }

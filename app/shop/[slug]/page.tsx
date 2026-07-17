@@ -1,3 +1,4 @@
+import ReviewList from "@/components/product/reviews/ReviewList";
 import { getProduct } from "@/lib/product";
 import Navbar from "../../../components/layout/Navbar";
 import Footer from "../../../components/layout/Footer";
@@ -64,9 +65,11 @@ export default async function ProductDetail({ params }: Props) {
 
   <div />
 
-  <ProductDetails
-    product={product}
-  />
+  <div>
+    <ProductDetails product={product} />
+
+    <ReviewList productId={product.id} />
+  </div>
 
 </div>
 

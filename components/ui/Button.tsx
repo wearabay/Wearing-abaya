@@ -35,7 +35,7 @@ export default function Button({
       return (
         <a
           href={disabled ? undefined : href}
-          target="_self"
+          target="_blank"
           rel="noopener noreferrer"
           className={`${className} ${disabledClass} ${widthClass}`}
           aria-disabled={disabled}

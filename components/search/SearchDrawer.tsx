@@ -78,12 +78,40 @@ useEffect(() => {
         color.toLowerCase().includes(q)
       );
 
+      const matchFeature =
+  product.features.some((feature) =>
+    feature.toLowerCase().includes(q)
+  );
+
+  const matchDescription =
+  product.description
+    .toLowerCase()
+    .includes(q);
+
+    const matchSpecification =
+  product.specifications.some((item) =>
+    `${item.label} ${item.value}`
+      .toLowerCase()
+      .includes(q)
+  );
+
     return (
-      matchName ||
-      matchCategory ||
-      matchBadge ||
-      matchColor
-    );
+
+matchName ||
+
+matchCategory ||
+
+matchBadge ||
+
+matchColor ||
+
+matchFeature ||
+
+matchDescription ||
+
+matchSpecification
+
+);
 
   });
 
