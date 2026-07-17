@@ -35,12 +35,6 @@ export default function RecommendedProducts() {
     product={product}
   />
 ))}
-{recommendations.map((product) => (
-  <ProductMiniCard
-    key={product.id}
-    product={product}
-  />
-))}
 
       </div>
 

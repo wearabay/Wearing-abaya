@@ -25,14 +25,20 @@ export function isWishlisted(id: number) {
 export function toggleWishlist(id: number) {
   const list = getWishlist();
 
+  let updated: number[];
+
   if (list.includes(id)) {
-    const updated = list.filter((item) => item !== id);
-    saveWishlist(updated);
-    return updated;
+    updated = list.filter((item) => item !== id);
+  } else {
+    updated = [...list, id];
   }
 
-  const updated = [...list, id];
   saveWishlist(updated);
+
+  window.dispatchEvent(
+    new Event("wishlist-updated")
+  );
+
   return updated;
 }
 

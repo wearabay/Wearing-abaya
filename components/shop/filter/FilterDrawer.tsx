@@ -24,7 +24,7 @@ export default function FilterDrawer({
       <div
         onClick={onClose}
         className={`
-          fixed inset-0 z-40 bg-black/40 transition-all duration-300
+          fixed inset-0 left-0 right-0 top-20 bottom-0 z-40 bg-black/40 transition-all duration-300
           ${open ? "opacity-100 visible" : "opacity-0 invisible"}
         `}
       />
@@ -33,7 +33,7 @@ export default function FilterDrawer({
 
       <aside
         className={`
-          fixed left-0 top-0 z-50
+          fixed left-0 top-20 bottom-0 z-50
           h-screen
           w-full
           max-w-sm

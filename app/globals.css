@@ -38,3 +38,9 @@ body {
 .animate-hero {
   animation: heroZoom 20s ease-in-out infinite alternate;
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(200%);
+  }
+}

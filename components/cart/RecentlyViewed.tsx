@@ -1,61 +1,62 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import Container from "@/components/ui/Container";
+import SectionTitle from "@/components/ui/SectionTitle";
 
 import type { Product } from "@/types/product";
 
 import { products } from "@/data/products";
 import { getRecentlyViewed } from "@/lib/recently-viewed";
-import { formatPrice } from "@/lib/currency";
-import ProductMiniCard from "@/components/product/ProductMiniCard";
 
-export default function RecentlyViewed() {
+import ProductCard from "@/components/product/ProductCard";
 
-const [items, setItems] = useState<Product[]>([]);
+type RecentlyViewedProps = {
+  currentSlug: string;
+};
+
+export default function RecentlyViewed({
+  currentSlug,
+}: RecentlyViewedProps) {
+  const [items, setItems] = useState<Product[]>([]);
 
   useEffect(() => {
+    const slugs = getRecentlyViewed().filter(
+      (slug) => slug !== currentSlug
+    );
 
-  const slugs = getRecentlyViewed();
+    const viewedProducts = slugs
+      .map((slug) =>
+        products.find((p) => p.slug === slug)
+      )
+      .filter(Boolean) as Product[];
 
-  const viewedProducts = slugs
-    .map((slug) =>
-      products.find((p) => p.slug === slug)
-    )
-    .filter(Boolean) as Product[];
-
-  setItems(viewedProducts);
-
-}, []);
+    setItems(viewedProducts);
+  }, [currentSlug]);
 
   if (!items.length) return null;
 
   return (
+    <section className="mt-28 border-t border-neutral-200 pt-24">
+      <Container>
 
-    <section>
-
-      <h2 className="mb-6 text-xl font-light">
-
-        Recently Viewed
-
-      </h2>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-        {items.map((product) => (
-
-          <ProductMiniCard
-  key={product.id}
-  product={product}
+      <SectionTitle
+  eyebrow="Continue Shopping"
+  title="Recently Viewed"
 />
 
-        ))}
+      <div className="mt-16 grid grid-cols-2 gap-8 lg:grid-cols-4">
 
-      </div>
+  {items.map((product) => (
+    <ProductCard
+      key={product.id}
+      product={product}
+    />
+  ))}
+
+</div>
+      </Container>
 
     </section>
-
   );
-
 }

@@ -1,8 +1,8 @@
+"use client";
+
 import type { Product } from "@/types/product";
 import ProductAccordion from "./accordion/ProductAccordion";
 import ProductSpecification from "./ProductSpecification";
-import { useEffect } from "react";
-import { addRecentlyViewed } from "@/lib/recently-viewed";
 
 type ProductDetailsProps = {
   product: Product;
@@ -12,12 +12,8 @@ export default function ProductDetails({
   product,
 }: ProductDetailsProps) {
 
-  useEffect(() => {
-  addRecentlyViewed(product.slug);
-}, [product.slug]);
-
   return (
-    <div className="mt-10 border-t border-neutral-200 pt-8">
+    <div className="mt-10 border-t border-neutral-200 pt-2">
 
       <ProductAccordion
         title="Description"
