@@ -12,7 +12,7 @@ import { getRecentlyViewed } from "@/lib/recently-viewed";
 import ProductCard from "@/components/product/ProductCard";
 
 type RecentlyViewedProps = {
-  currentSlug: string;
+  currentSlug?: string;
 };
 
 export default function RecentlyViewed({
@@ -26,9 +26,7 @@ export default function RecentlyViewed({
     );
 
     const viewedProducts = slugs
-      .map((slug) =>
-        products.find((p) => p.slug === slug)
-      )
+      .map((slug) => products.find((p) => p.slug === slug))
       .filter(Boolean) as Product[];
 
     setItems(viewedProducts);
@@ -39,24 +37,20 @@ export default function RecentlyViewed({
   return (
     <section className="mt-28 border-t border-neutral-200 pt-24">
       <Container>
+        <SectionTitle
+          eyebrow="Continue Shopping"
+          title="Recently Viewed"
+        />
 
-      <SectionTitle
-  eyebrow="Continue Shopping"
-  title="Recently Viewed"
-/>
-
-      <div className="mt-16 grid grid-cols-2 gap-8 lg:grid-cols-4">
-
-  {items.map((product) => (
-    <ProductCard
-      key={product.id}
-      product={product}
-    />
-  ))}
-
-</div>
+        <div className="mt-16 grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {items.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
+        </div>
       </Container>
-
     </section>
   );
 }
