@@ -26,7 +26,7 @@ export default function ProductMiniCard({
           relative
           aspect-[4/5]
           overflow-hidden
-          rounded-2xl
+          rounded-xl
           bg-stone-100
         "
       >

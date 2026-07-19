@@ -27,8 +27,7 @@ export default function RecommendedProducts() {
 
       </div>
 
-      <div className="grid grid-cols-2 gap-5">
-
+      <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
         {recommendations.map((product) => (
   <ProductMiniCard
     key={product.id}

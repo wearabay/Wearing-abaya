@@ -4,54 +4,47 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 import { closeCart } from "@/lib/cart-drawer";
-import {
-  getCart,
-  type CartItem,
-} from "@/lib/cart";
-import { formatPrice } from "@/lib/currency";
+import { useCart } from "@/context/CartContext";
+
 import EmptyCart from "./EmptyCart";
-import Link from "next/link";
 import CartItemCard from "./CartItemCard";
 import CartSummary from "./CartSummary";
 
-
 export default function CartDrawer() {
-
   const [open, setOpen] = useState(false);
-
-  const [items, setItems] = useState<CartItem[]>([]);
-
   const [addedBanner, setAddedBanner] = useState(false);
 
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const {
+    items,
+    subtotal,
+    refreshCart,
+  } = useCart();
 
   useEffect(() => {
-    setItems(getCart());
+    refreshCart();
 
     const openDrawer = () => {
-  setItems(getCart());
-  setOpen(true);
-};
+      refreshCart();
+      setOpen(true);
+    };
 
     const closeDrawer = () => {
       setOpen(false);
     };
 
     const updateCart = () => {
-      setItems(getCart());
+      refreshCart();
     };
 
     const handleAdded = () => {
-  setItems(getCart());
-  setOpen(true);
-  setAddedBanner(true);
-  setTimeout(() => {
-    setAddedBanner(false);
-  }, 2000);
-};
+      refreshCart();
+      setOpen(true);
+      setAddedBanner(true);
+
+      setTimeout(() => {
+        setAddedBanner(false);
+      }, 2000);
+    };
 
     window.addEventListener("cart-open", openDrawer);
     window.addEventListener("cart-close", closeDrawer);
@@ -59,7 +52,6 @@ export default function CartDrawer() {
     window.addEventListener("cart-added", handleAdded);
 
     return () => {
-
       window.removeEventListener(
         "cart-open",
         openDrawer
@@ -75,22 +67,23 @@ export default function CartDrawer() {
         updateCart
       );
 
+      window.removeEventListener(
+        "cart-added",
+        handleAdded
+      );
     };
-
-  }, []);
+  }, [refreshCart]);
 
   useEffect(() => {
-  document.body.style.overflow =
-    open ? "hidden" : "";
+    document.body.style.overflow = open ? "hidden" : "";
 
-  return () => {
-    document.body.style.overflow = "";
-  };
-}, [open]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <>
-
       {/* Backdrop */}
 
       <div
@@ -114,17 +107,15 @@ export default function CartDrawer() {
             : "translate-x-full"
         }`}
       >
-
         {/* Header */}
 
         <div className="flex items-center justify-between border-b p-6 text-neutral-900">
-
           <h2 className="text-xl font-light">
             Shopping Bag
           </h2>
 
           <button
-          aria-label="Close cart"
+            aria-label="Close cart"
             onClick={() => {
               closeCart();
               setOpen(false);
@@ -132,61 +123,42 @@ export default function CartDrawer() {
           >
             <X size={22} />
           </button>
-
         </div>
 
+        {/* Success Banner */}
+
         {addedBanner && (
-  <div
-    className="
-      border-b
-      bg-stone-50
-      px-6
-      py-4
-      text-sm
-      text-emerald-700
-    "
-  >
-    ✓ Added to your bag
-  </div>
-)}
+          <div className="border-b bg-stone-50 px-6 py-4 text-sm text-emerald-700">
+            ✓ Added to your bag
+          </div>
+        )}
 
         {/* Content */}
 
         <div className="flex-1 overflow-y-auto p-6 pb-10 text-neutral-900">
-
           {items.length === 0 ? (
-
-  <EmptyCart />
-
-) : (
-
+            <EmptyCart />
+          ) : (
             <div className="space-y-5">
-  {items.map((item) => (
-    <CartItemCard
-      key={`${item.id}-${item.color}-${item.size}`}
-      item={item}
-      onUpdate={() => setItems(getCart())}
-    />
-
-  ))}
-
-</div>
-
+              {items.map((item) => (
+                <CartItemCard
+                  key={`${item.id}-${item.color}-${item.size}`}
+                  item={item}
+                />
+              ))}
+            </div>
           )}
+        </div>
 
-                </div>
+        {/* Footer */}
 
         {items.length > 0 && (
-
-  <CartSummary
-    subtotal={subtotal}
-    onViewCart={() => closeCart()}
-  />
-
-)}
-
+          <CartSummary
+            subtotal={subtotal}
+            onViewCart={() => closeCart()}
+          />
+        )}
       </aside>
-
     </>
   );
 }

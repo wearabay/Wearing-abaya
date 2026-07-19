@@ -1,35 +1,42 @@
+"use client";
+
 import Container from "@/components/ui/Container";
 
 import CheckoutHeader from "@/components/checkout/CheckoutHeader";
 import ContactForm from "@/components/checkout/ContactForm";
 import ShippingAddress from "@/components/checkout/ShippingAddress";
 import DeliveryMethod from "@/components/checkout/DeliveryMethod";
+import PaymentMethod from "@/components/checkout/PaymentMethod";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import CheckoutActions from "@/components/checkout/CheckoutActions";
 
+import { useCart } from "@/context/CartContext";
+
 export default function CheckoutPage() {
+  const { count } = useCart();
+
   return (
     <Container className="py-16 lg:py-20">
-      <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr]">
+      <CheckoutHeader itemCount={count} />
 
-        <div className="space-y-10">
-          <CheckoutHeader itemCount={2} />
-
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_420px]">
+        {/* Left */}
+        <div className="space-y-8">
           <ContactForm />
 
           <ShippingAddress />
 
           <DeliveryMethod />
+
+          <PaymentMethod />
         </div>
 
-        <aside className="lg:sticky lg:top-28 self-start">
+        {/* Right */}
+        <aside className="h-fit space-y-6 self-start lg:sticky lg:top-28">
           <OrderSummary />
 
-          <div className="mt-8">
-            <CheckoutActions />
-          </div>
+          <CheckoutActions />
         </aside>
-
       </div>
     </Container>
   );

@@ -1,11 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import {
-  getCart,
-  type CartItem,
-} from "@/lib/cart";
+import { useCart } from "@/context/CartContext";
 
 import EmptyCart from "./EmptyCart";
 import CartItemCard from "./CartItemCard";
@@ -15,84 +10,40 @@ import RecommendedProducts from "./RecommendedProducts";
 import RecentlyViewed from "./RecentlyViewed";
 
 export default function CartPage() {
-
-  const [items, setItems] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-
-    setItems(getCart());
-
-    const update = () => {
-      setItems(getCart());
-    };
-
-    window.addEventListener(
-      "cart-updated",
-      update
-    );
-
-    return () =>
-      window.removeEventListener(
-        "cart-updated",
-        update
-      );
-
-  }, []);
-
-  const subtotal = items.reduce(
-    (sum, item) =>
-      sum + item.price * item.quantity,
-    0
-  );
+  const { items, subtotal } = useCart();
 
   if (items.length === 0) {
     return <EmptyCart />;
   }
 
   return (
+    <>
+      {/* Cart Layout */}
+      <div className="grid gap-12 lg:grid-cols-[1fr_380px]">
+        {/* Cart Items */}
+        <div className="space-y-6">
+          {items.map((item) => (
+            <CartItemCard
+              key={`${item.id}-${item.color}-${item.size}`}
+              item={item}
+            />
+          ))}
+        </div>
 
-  <div className="grid gap-12 lg:grid-cols-[1fr_380px]">
+        {/* Order Summary */}
+        <aside className="h-fit space-y-6 lg:sticky lg:top-28 self-start">
+          <FreeShippingProgress subtotal={subtotal} />
 
-    <div className="space-y-6">
+          <CartSummary subtotal={subtotal} />
+        </aside>
+      </div>
 
-      {items.map((item) => (
+      {/* Recommendations */}
+      <section className="mt-20 space-y-20">
+        <RecommendedProducts />
 
-        <CartItemCard
-          key={`${item.id}-${item.color}-${item.size}`}
-          item={item}
-          onUpdate={() => setItems(getCart())}
-        />
-
-      ))}
-
-    </div>
-
-    <div className="lg:sticky lg:top-28 h-fit space-y-6">
-
-      <FreeShippingProgress
-        subtotal={subtotal}
-      />
-
-      <CartSummary
-        subtotal={subtotal}
-      />
-
-    </div>
-
-    <div className="mt-20">
-
-  <RecommendedProducts />
-
-<div className="mt-20">
-
-  <RecentlyViewed />
-
-</div>
-
-</div>
-
-  </div>
-
-);
-
+        <RecentlyViewed />
+      </section>
+    </>
+  );
 }

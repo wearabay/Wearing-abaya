@@ -123,3 +123,13 @@ export function getCartItem(
       item.size === size
   );
 }
+
+export function subscribeCart(callback: () => void) {
+  window.addEventListener("cart-updated", callback);
+
+  return () =>
+    window.removeEventListener(
+      "cart-updated",
+      callback
+    );
+}

@@ -1,9 +1,13 @@
 type CheckoutHeaderProps = {
-  itemCount: number;
+  itemCount?: number;
+  title?: string;
+  subtitle?: string;
 };
 
 export default function CheckoutHeader({
   itemCount,
+  title = "Checkout",
+  subtitle,
 }: CheckoutHeaderProps) {
   return (
     <div className="border-b border-neutral-200 pb-6">
@@ -12,12 +16,19 @@ export default function CheckoutHeader({
       </p>
 
       <h1 className="mt-2 text-3xl font-light">
-        Checkout
+        {title}
       </h1>
 
-      <p className="mt-2 text-sm text-neutral-500">
-        {itemCount} item{itemCount !== 1 ? "s" : ""} in your order
-      </p>
+      {subtitle ? (
+        <p className="mt-2 text-sm text-neutral-500">
+          {subtitle}
+        </p>
+      ) : itemCount !== undefined ? (
+        <p className="mt-2 text-sm text-neutral-500">
+          {itemCount} item
+          {itemCount !== 1 ? "s" : ""} in your order
+        </p>
+      ) : null}
     </div>
   );
 }

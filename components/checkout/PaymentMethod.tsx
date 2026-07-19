@@ -1,43 +1,51 @@
 "use client";
 
-import { Truck } from "lucide-react";
+import { CreditCard } from "lucide-react";
 import { useCheckout } from "@/context/CheckoutContext";
 
-const deliveryOptions = [
+const paymentOptions = [
   {
-    id: "regular",
-    title: "Regular Delivery",
-    description: "Estimated 3–5 business days",
-    price: "FREE",
+    id: "bank",
+    title: "Bank Transfer",
+    description: "BCA • Mandiri • BNI • BRI",
   },
   {
-    id: "express",
-    title: "Express Delivery",
-    description: "Estimated 1–2 business days",
-    price: "Rp 35.000",
+    id: "ewallet",
+    title: "E-Wallet",
+    description: "GoPay • OVO • DANA • ShopeePay",
+  },
+  {
+    id: "qris",
+    title: "QRIS",
+    description: "Pay using any QRIS supported application",
+  },
+  {
+    id: "cod",
+    title: "Cash on Delivery",
+    description: "Available in selected areas",
   },
 ];
 
-export default function DeliveryMethod() {
+export default function PaymentMethod() {
   const {
-    delivery,
-    setDelivery,
+    payment,
+    setPayment,
   } = useCheckout();
 
   return (
     <section className="rounded-2xl border border-stone-200 bg-white p-6">
 
       <div className="mb-6 flex items-center gap-2">
-        <Truck className="h-5 w-5" />
+        <CreditCard className="h-5 w-5" />
 
         <h2 className="text-lg font-medium">
-          Delivery Method
+          Payment Method
         </h2>
       </div>
 
       <div className="space-y-4">
 
-        {deliveryOptions.map((option) => (
+        {paymentOptions.map((option) => (
           <label
             key={option.id}
             className={`
@@ -50,7 +58,7 @@ export default function DeliveryMethod() {
               p-4
               transition-all
               ${
-                delivery === option.id
+                payment === option.id
                   ? "border-black bg-stone-50"
                   : "border-stone-200 hover:border-stone-400"
               }
@@ -60,9 +68,9 @@ export default function DeliveryMethod() {
 
               <input
                 type="radio"
-                name="delivery"
-                checked={delivery === option.id}
-                onChange={() => setDelivery(option.id)}
+                name="payment"
+                checked={payment === option.id}
+                onChange={() => setPayment(option.id)}
                 className="mt-1"
               />
 
@@ -79,10 +87,6 @@ export default function DeliveryMethod() {
               </div>
 
             </div>
-
-            <span className="font-medium">
-              {option.price}
-            </span>
 
           </label>
         ))}

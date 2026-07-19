@@ -1,39 +1,37 @@
 "use client";
 
 import Image from "next/image";
+import { Trash2 } from "lucide-react";
+
 import { formatPrice } from "@/lib/currency";
-import {
-  updateCartQuantity,
-  removeCartItem,
-  getCart,
-  type CartItem,
-} from "@/lib/cart";
+import { type CartItem } from "@/lib/cart";
+
+import { useCart } from "@/context/CartContext";
 
 type Props = {
   item: CartItem;
-  onUpdate: () => void;
 };
 
 export default function CartItemCard({
   item,
-  onUpdate,
 }: Props) {
+  const {
+    updateQuantity,
+    removeItem,
+  } = useCart();
+
   return (
     <div className="flex gap-4 border-b pb-6">
-
       <div className="relative h-28 w-20 overflow-hidden rounded-xl bg-stone-100">
-
         <Image
           src={item.image}
           alt={item.name}
           fill
           className="object-cover"
         />
-
       </div>
 
       <div className="flex flex-1 flex-col">
-
         <h3 className="font-medium text-neutral-900">
           {item.name}
         </h3>
@@ -45,29 +43,17 @@ export default function CartItemCard({
         </p>
 
         <div className="mt-4 flex items-center gap-3">
-
           <button
             disabled={item.quantity === 1}
-            onClick={() => {
-              updateCartQuantity(
+            onClick={() =>
+              updateQuantity(
                 item.id,
                 item.color,
                 item.size,
                 item.quantity - 1
-              );
-
-              onUpdate();
-            }}
-            className="
-              flex
-              h-8
-              w-8
-              items-center
-              justify-center
-              rounded-full
-              border
-              disabled:opacity-30
-            "
+              )
+            }
+            className="flex h-8 w-8 items-center justify-center rounded-full border disabled:opacity-30"
           >
             −
           </button>
@@ -75,56 +61,47 @@ export default function CartItemCard({
           <span>{item.quantity}</span>
 
           <button
-            onClick={() => {
-              updateCartQuantity(
+            onClick={() =>
+              updateQuantity(
                 item.id,
                 item.color,
                 item.size,
                 item.quantity + 1
-              );
-
-              onUpdate();
-            }}
-            className="
-              flex
-              h-8
-              w-8
-              items-center
-              justify-center
-              rounded-full
-              border
-            "
+              )
+            }
+            className="flex h-8 w-8 items-center justify-center rounded-full border"
           >
             +
           </button>
-
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-
           <p className="font-medium">
             {formatPrice(item.price * item.quantity)}
           </p>
 
           <button
-            onClick={() => {
-              removeCartItem(
-                item.id,
-                item.color,
-                item.size
-              );
-
-              onUpdate();
-            }}
-            className="text-xs uppercase tracking-[0.18em] text-red-500"
-          >
-            Remove
-          </button>
-
+  aria-label="Remove item"
+  onClick={() =>
+    removeItem(
+      item.id,
+      item.color,
+      item.size
+    )
+  }
+  className="
+    rounded-full
+    p-2
+    text-neutral-500
+    transition
+    hover:bg-red-50
+    hover:text-red-500
+  "
+>
+  <Trash2 size={18} />
+</button>
         </div>
-
       </div>
-
     </div>
   );
 }

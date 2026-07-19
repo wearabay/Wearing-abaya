@@ -1,15 +1,55 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import Button from "@/components/ui/Button";
 
-export default function CheckoutActions() {
-  return (
-    <div className="space-y-4">
-      <Button fullWidth={true}>
-  Continue to Payment
-</Button>
+import { useCheckout } from "@/context/CheckoutContext";
+import {
+  validateCheckout,
+  isCheckoutValid,
+} from "@/lib/checkout-validation";
 
-      <p className="text-center text-xs text-neutral-500">
-        Secure payment powered by our payment partner.
-      </p>
+export default function CheckoutActions() {
+  const router = useRouter();
+
+  const {
+    contact,
+    address,
+
+    setErrors,
+  } = useCheckout();
+
+  const valid = isCheckoutValid(
+    contact,
+    address
+  );
+
+  function handleContinue() {
+    const errors = validateCheckout(
+      contact,
+      address
+    );
+
+    setErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    router.push("/checkout/review");
+  }
+
+  return (
+    <div className="mt-10 flex justify-end">
+
+      <Button
+        onClick={handleContinue}
+        disabled={!valid}
+      >
+        Continue to Payment
+      </Button>
+
     </div>
   );
 }

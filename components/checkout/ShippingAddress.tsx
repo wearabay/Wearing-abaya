@@ -1,51 +1,130 @@
+"use client";
+
+import Input from "@/components/ui/Input";
+import { useCheckout } from "@/context/CheckoutContext";
+
 export default function ShippingAddress() {
+  const {
+    address,
+    setAddress,
+  } = useCheckout();
+
+  function updateField(
+    field: keyof typeof address,
+    value: string
+  ) {
+    setAddress((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }
+
   return (
-    <section className="border-b border-neutral-200 py-8">
-      <h2 className="mb-6 text-xl font-light">
+    <section className="rounded-2xl border border-stone-200 bg-white p-6">
+
+      <h2 className="mb-6 text-lg font-medium">
         Shipping Address
       </h2>
 
-      <div className="space-y-4">
-        <div className="grid gap-4 md:grid-cols-2">
-          <input
-            type="text"
-            placeholder="First Name"
-            className="w-full border border-neutral-300 px-4 py-3"
+      <div className="space-y-5">
+
+        {/* First & Last Name */}
+
+        <div className="grid gap-5 md:grid-cols-2">
+
+          <Input
+            label="First Name"
+            value={address.firstName}
+            onChange={(e) =>
+              updateField("firstName", e.target.value)
+            }
           />
 
-          <input
-            type="text"
-            placeholder="Last Name"
-            className="w-full border border-neutral-300 px-4 py-3"
+          <Input
+            label="Last Name"
+            value={address.lastName}
+            onChange={(e) =>
+              updateField("lastName", e.target.value)
+            }
           />
+
         </div>
 
-        <input
-          type="text"
-          placeholder="Address"
-          className="w-full border border-neutral-300 px-4 py-3"
+        {/* Company */}
+
+        <Input
+          label="Company (Optional)"
+          value={address.company}
+          onChange={(e) =>
+            updateField("company", e.target.value)
+          }
         />
 
-        <div className="grid gap-4 md:grid-cols-3">
-          <input
-            type="text"
-            placeholder="City"
-            className="w-full border border-neutral-300 px-4 py-3"
-          />
+        {/* Country */}
 
-          <input
-            type="text"
-            placeholder="Province"
-            className="w-full border border-neutral-300 px-4 py-3"
-          />
+        <Input
+          label="Country"
+          value={address.country}
+          readOnly
+        />
 
-          <input
-            type="text"
-            placeholder="Postal Code"
-            className="w-full border border-neutral-300 px-4 py-3"
-          />
-        </div>
+        {/* Province */}
+
+        <Input
+          label="Province"
+          placeholder="Central Java"
+          value={address.province}
+          onChange={(e) =>
+            updateField("province", e.target.value)
+          }
+        />
+
+        {/* City */}
+
+        <Input
+          label="City"
+          placeholder="Pekalongan"
+          value={address.city}
+          onChange={(e) =>
+            updateField("city", e.target.value)
+          }
+        />
+
+        {/* Postal */}
+
+        <Input
+          label="Postal Code"
+          placeholder="51111"
+          value={address.postalCode}
+          onChange={(e) =>
+            updateField("postalCode", e.target.value)
+          }
+        />
+
+        {/* Street */}
+
+        <Input
+          label="Street Address"
+          placeholder="Jl. Example No.123"
+          value={address.street}
+          onChange={(e) =>
+            updateField("street", e.target.value)
+          }
+        />
+
+        {/* Apartment */}
+
+        <Input
+          label="Apartment / Suite (Optional)"
+          placeholder="Apartment, unit, floor"
+          value={address.apartment}
+          onChange={(e) =>
+            updateField("apartment", e.target.value)
+          }
+        />
+
       </div>
+
     </section>
   );
 }
