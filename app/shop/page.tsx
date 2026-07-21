@@ -9,7 +9,7 @@ import ProductGrid from "@/components/shop/ProductGrid";
 export default function ShopPage() {
   return (
     <>
-      <Navbar />
+      <Navbar transparent />
 
       <ShopProvider>
 

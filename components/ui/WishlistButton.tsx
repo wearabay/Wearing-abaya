@@ -39,23 +39,18 @@ export default function WishlistButton({
 }, [productId]);
 
   function handleClick(
-    e: React.MouseEvent<HTMLButtonElement>
-  ) {
-    e.preventDefault();
-    e.stopPropagation();
+  e: React.MouseEvent<HTMLButtonElement>
+) {
+  e.preventDefault();
+  e.stopPropagation();
 
+  const updated =
     toggleWishlist(productId);
 
-window.dispatchEvent(
-  new Event("wishlist-updated")
-);
-
-window.dispatchEvent(
-  new Event("wishlist-updated")
-);
-
-setLiked(isWishlisted(productId));
-  }
+  setLiked(
+    updated.includes(productId)
+  );
+}
 
   return (
     <button

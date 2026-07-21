@@ -57,3 +57,13 @@ export function removeWishlist(id: number) {
     new Event("wishlist-updated")
   );
 }
+
+export function clearWishlist() {
+  if (typeof window === "undefined") return;
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  window.dispatchEvent(
+    new Event("wishlist-updated")
+  );
+}

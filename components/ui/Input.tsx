@@ -1,6 +1,6 @@
 import {
-  forwardRef,
   InputHTMLAttributes,
+  useId,
 } from "react";
 
 type InputProps =
@@ -9,88 +9,65 @@ type InputProps =
     error?: string;
   };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      label,
-      error,
-      className = "",
-      id,
-      ...props
-    },
-    ref
-  ) => {
-    const inputId =
-      id ??
-      props.name ??
-      Math.random().toString(36).slice(2);
 
-    return (
-      <div className="space-y-2">
+export default function Input({
+  label,
+  error,
+  className = "",
+  ...props
+}: InputProps) {
 
-        {label && (
-          <label
-            htmlFor={inputId}
-            className="
-              text-xs
-              uppercase
-              tracking-[0.2em]
-              text-neutral-600
-            "
-          >
-            {label}
-          </label>
-        )}
+  const inputId = useId();
 
-        <input
-          ref={ref}
-          id={inputId}
-          suppressHydrationWarning
-          autoComplete="off"
-          spellCheck={false}
-          autoCapitalize="none"
-          aria-invalid={!!error}
-          aria-describedby={
-            error
-              ? `${inputId}-error`
-              : undefined
-          }
-          className={`
-            h-14
-            w-full
-            rounded-md
-            border
-            bg-white
-            px-5
-            outline-none
-            transition-all
-            duration-200
 
-            ${
-              error
-                ? "border-red-500 focus:border-red-500"
-                : "border-neutral-300 focus:border-black"
-            }
+  return (
+    <div className="space-y-2">
 
-            ${className}
-          `}
-          {...props}
-        />
+      {label && (
+        <label
+          htmlFor={inputId}
+          className="
+            text-xs
+            uppercase
+            tracking-[0.2em]
+            text-neutral-600
+          "
+        >
+          {label}
+        </label>
+      )}
 
-        {error && (
-          <p
-            id={`${inputId}-error`}
-            className="text-sm text-red-500"
-          >
-            {error}
-          </p>
-        )}
 
-      </div>
-    );
-  }
-);
+      <input
+        id={inputId}
+        suppressHydrationWarning
+        autoComplete="off"
+        spellCheck={false}
+        autoCapitalize="none"
+        className={`
+          h-14
+          w-full
+          rounded-md
+          border
+          border-neutral-300
+          bg-white
+          px-5
+          outline-none
+          transition
+          focus:border-black
+          ${error ? "border-red-500" : ""}
+          ${className}
+        `}
+        {...props}
+      />
 
-Input.displayName = "Input";
 
-export default Input;
+      {error && (
+        <p className="text-sm text-red-500">
+          {error}
+        </p>
+      )}
+
+    </div>
+  );
+}

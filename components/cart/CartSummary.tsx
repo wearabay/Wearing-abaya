@@ -98,21 +98,24 @@ export default function CartSummary({
           View Cart
         </Link>
 
-        <button
-          type="button"
-          className="
-            rounded-full
-            bg-black
-            py-4
-            text-xs
-            uppercase
-            tracking-[0.22em]
-            text-white
-            hover:bg-neutral-800
-          "
-        >
-          Checkout
-        </button>
+        <Link
+  href="/checkout"
+  onClick={onViewCart}
+  className="
+    rounded-full
+    bg-black
+    py-4
+    text-center
+    text-xs
+    uppercase
+    tracking-[0.22em]
+    text-white
+    transition
+    hover:bg-neutral-800
+  "
+>
+  Checkout
+</Link>
 
         </div>
 

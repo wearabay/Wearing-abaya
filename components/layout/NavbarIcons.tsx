@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Heart, ShoppingBag } from "lucide-react";
+import {
+  Search,
+  Heart,
+  ShoppingBag,
+  UserRound,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { getWishlistCount } from "@/lib/wishlist";
@@ -72,11 +77,24 @@ export default function NavbarIcons({
         <Heart size={22} strokeWidth={1.8} />
 
         {wishlistCount > 0 && (
-          <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-neutral-900 ring-2 ring-white text-[10px] font-semibold text-white">
+          <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-[#B99143] ring-2 ring-white text-[10px] font-semibold text-white">
             {wishlistCount}
           </span>
         )}
       </Link>
+
+      {/* ACCOUNT */}
+
+<Link
+  href="/account"
+  className={iconClass}
+  aria-label="Account"
+>
+  <UserRound
+    size={22}
+    strokeWidth={1.8}
+  />
+</Link>
 
       {/* CART */}
       <button
@@ -88,7 +106,7 @@ export default function NavbarIcons({
         <ShoppingBag size={22} strokeWidth={1.8} />
 
         {cartCount > 0 && (
-          <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-neutral-900 ring-2 ring-white text-[10px] font-semibold text-white">
+          <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-[#B99143] ring-2 ring-white text-[10px] font-semibold text-white">
             {cartCount}
           </span>
         )}

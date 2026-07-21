@@ -7,7 +7,7 @@ export default function Page() {
     <>
       <Navbar />
 
-      <main className="mx-auto w-full max-w-[1450px] px-8 py-16">
+      <main className="mx-auto w-full max-w-[1450px] px-8 py-24">
         <h1 className="mb-12 text-5xl font-light">
           Shopping Bag
         </h1>

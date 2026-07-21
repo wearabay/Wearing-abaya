@@ -1,21 +1,23 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
 import Container from "@/components/ui/Container";
 
-import AccountDashboard from "@/components/account/AccountDashboard";
+import ProfileForm from "@/components/account/ProfileForm";
 
-export default function AccountPage() {
+
+export default function ProfilePage() {
+
   return (
     <>
       <Navbar />
 
       <main>
-        <Container className="mx-auto max-w-7xl px-6 py-24">
+        <Container className="py-24">
 
-        <AccountDashboard />
+          <ProfileForm />
 
         </Container>
-
       </main>
 
       <Footer />
