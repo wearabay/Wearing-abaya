@@ -13,7 +13,14 @@ import SearchDrawer from "@/components/search/SearchDrawer";
 import { openCart } from "@/lib/cart-drawer";
 
 
-export default function Navbar() {
+type NavbarProps = {
+  transparent?: boolean;
+};
+
+
+export default function Navbar({
+  transparent = false,
+}: NavbarProps) {
 
   const pathname = usePathname();
 
@@ -74,8 +81,10 @@ export default function Navbar() {
 
 
   const darkNavbar =
-    !isTransparentPage ||
-    scrolled;
+  !transparent &&
+  !isTransparentPage
+    ? true
+    : scrolled || !isTransparentPage;
 
 
 
