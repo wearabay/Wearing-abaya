@@ -1,21 +1,43 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Badge from "../ui/Badge";
 import WishlistButton from "@/components/ui/WishlistButton";
+
 import { openQuickView } from "@/lib/quick-view";
+
 import type { Product } from "@/types/product";
+
 
 type Props = {
   product: Product;
 };
 
+
 export default function ProductImage({
   product,
 }: Props) {
+
+  const router = useRouter();
+
+
+  const primaryImage =
+    product.images?.[0] ?? product.image;
+
+
+  const secondaryImage =
+    product.images?.[1] ?? primaryImage;
+
+
+
   return (
+
     <div
+      onClick={() =>
+        router.push(`/shop/${product.slug}`)
+      }
       className="
         group
         relative
@@ -23,32 +45,76 @@ export default function ProductImage({
         overflow-hidden
         rounded-xl
         bg-[#ECE8E2]
+        cursor-pointer
         transition-all
         duration-500
         hover:shadow-xl
       "
     >
+
+
       {/* Badge */}
 
       {product.badge && (
-        <div className="absolute left-4 top-4 z-20">
-          <Badge>{product.badge}</Badge>
+
+        <div
+          className="
+            absolute
+            left-4
+            top-4
+            z-20
+          "
+        >
+          <Badge>
+            {product.badge}
+          </Badge>
         </div>
+
       )}
+
+
+
 
       {/* Wishlist */}
 
-      <div className="absolute right-4 top-4 z-20">
-        <WishlistButton productId={product.id} />
+      <div
+        className="
+          absolute
+          right-4
+          top-4
+          z-20
+        "
+        onClick={(e) =>
+          e.stopPropagation()
+        }
+      >
+
+        <WishlistButton
+          productId={product.id}
+        />
+
       </div>
+
+
+
+
 
       {/* Main Image */}
 
       <Image
-        src={product.images[0]}
+
+        src={primaryImage}
+
         alt={product.name}
+
         fill
-        sizes="(max-width:768px) 50vw, (max-width:1200px) 33vw, 25vw"
+
+        sizes="
+          (max-width:768px) 50vw,
+          (max-width:1200px) 33vw,
+          25vw
+        "
+
         className="
           object-cover
           transition-all
@@ -58,15 +124,29 @@ export default function ProductImage({
           group-hover:scale-[1.03]
           group-hover:brightness-95
         "
+
       />
+
+
+
+
 
       {/* Hover Image */}
 
       <Image
-        src={product.images[1] ?? product.images[0]}
+
+        src={secondaryImage}
+
         alt={product.name}
+
         fill
-        sizes="(max-width:768px) 50vw, (max-width:1200px) 33vw, 25vw"
+
+        sizes="
+          (max-width:768px) 50vw,
+          (max-width:1200px) 33vw,
+          25vw
+        "
+
         className="
           object-cover
           opacity-0
@@ -77,11 +157,18 @@ export default function ProductImage({
           group-hover:scale-100
           group-hover:opacity-100
         "
+
       />
+
+
+
+
+
 
       {/* Gradient */}
 
       <div
+
         className="
           absolute
           inset-x-0
@@ -96,16 +183,29 @@ export default function ProductImage({
           duration-500
           group-hover:opacity-100
         "
+
       />
+
+
+
+
+
+
 
       {/* Quick View */}
 
       <button
+
         onClick={(e) => {
+
           e.preventDefault();
+
           e.stopPropagation();
+
           openQuickView(product);
+
         }}
+
         className="
           absolute
           left-1/2
@@ -132,9 +232,16 @@ export default function ProductImage({
           group-hover:scale-100
           group-hover:opacity-100
         "
+
       >
+
         QUICK VIEW
+
       </button>
+
+
+
     </div>
+
   );
 }

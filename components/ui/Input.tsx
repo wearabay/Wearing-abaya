@@ -3,6 +3,7 @@ import {
   useId,
 } from "react";
 
+
 type InputProps =
   InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
@@ -10,18 +11,25 @@ type InputProps =
   };
 
 
+
 export default function Input({
   label,
   error,
   className = "",
+  id,
   ...props
 }: InputProps) {
 
-  const inputId = useId();
+
+  const generatedId = useId();
+
+  const inputId = id ?? generatedId;
+
 
 
   return (
     <div className="space-y-2">
+
 
       {label && (
         <label
@@ -38,12 +46,14 @@ export default function Input({
       )}
 
 
+
       <input
         id={inputId}
         suppressHydrationWarning
         autoComplete="off"
         spellCheck={false}
         autoCapitalize="none"
+
         className={`
           h-14
           w-full
@@ -58,15 +68,20 @@ export default function Input({
           ${error ? "border-red-500" : ""}
           ${className}
         `}
+
         {...props}
       />
 
 
+
       {error && (
+
         <p className="text-sm text-red-500">
           {error}
         </p>
+
       )}
+
 
     </div>
   );

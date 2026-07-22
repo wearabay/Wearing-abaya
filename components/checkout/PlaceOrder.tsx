@@ -29,49 +29,29 @@ export default function PlaceOrder() {
     payment,
   } = useCheckout();
 
-
-
   function handlePlaceOrder() {
-
-
+    if (!items.length) {
+  router.push("/cart");
+  return;
+}
     const orderId =
       `WA-${Date.now()}`;
 
-
-
     createOrder({
-
       id: orderId,
-
       items,
-
       customer:{
         email: contact.email,
         phone: contact.phone,
       },
-
-
       address,
-
-
       delivery,
-
-
       payment,
-
-
       subtotal,
-
-
       status:"pending",
-
-
       createdAt:
         new Date().toISOString(),
-
     });
-
-
 
     /*
       Untuk sekarang:
@@ -80,16 +60,11 @@ export default function PlaceOrder() {
       Nanti setelah payment berhasil:
       clearCart()
     */
-
-
     router.push(
       `/checkout/payment?order=${orderId}`
     );
 
   }
-
-
-
   return (
 
     <section
@@ -105,7 +80,6 @@ export default function PlaceOrder() {
       <h2 className="mb-4 text-lg font-medium">
         Complete Order
       </h2>
-
 
       <p className="
         mb-6
@@ -123,10 +97,6 @@ export default function PlaceOrder() {
       >
         Place Order
       </Button>
-
-
     </section>
-
   );
-
 }

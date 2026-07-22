@@ -28,26 +28,28 @@ export default function ContactForm() {
 
       <div className="space-y-5">
         <Input
-          label="Email Address"
-          type="email"
-          placeholder="you@example.com"
-          value={contact.email}
-          error={errors.email}
-          onChange={(e) =>
-            updateField("email", e.target.value)
-          }
-        />
+  id="email"
+  label="Email Address"
+  type="email"
+  placeholder="you@example.com"
+  value={contact.email}
+  error={errors.email}
+  onChange={(e) =>
+    updateField("email", e.target.value)
+  }
+/>
 
-        <Input
-          label="Phone Number"
-          type="tel"
-          placeholder="+62 812 xxxx xxxx"
-          value={contact.phone}
-          error={errors.phone}
-          onChange={(e) =>
-            updateField("phone", e.target.value)
-          }
-        />
+<Input
+  id="phone"
+  label="Phone Number"
+  type="tel"
+  placeholder="+62 812 xxxx xxxx"
+  value={contact.phone}
+  error={errors.phone}
+  onChange={(e) =>
+    updateField("phone", e.target.value)
+  }
+/>
 
         <label className="flex cursor-pointer items-start gap-3">
           <input

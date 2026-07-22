@@ -33,7 +33,7 @@ export default async function OrderDetailPage({
       <>
       <Navbar />
 
-      <Container className="py-20">
+      <Container className="py-26">
 
         <h1 className="text-3xl font-light">
           Order Not Found
@@ -54,7 +54,7 @@ export default async function OrderDetailPage({
 
     <main>
 
-    <Container className="py-16">
+    <Container className="py-24">
 
 
       <div className="space-y-10">

@@ -12,7 +12,7 @@ export default function ReviewPage() {
     <>
       <Navbar />
 
-      <main className="mx-auto max-w-[1450px] px-8 py-16">
+      <main className="mx-auto max-w-[1450px] px-8 py-24">
 
         <CheckoutHeader
           title="Review Order"

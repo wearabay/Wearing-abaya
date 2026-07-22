@@ -26,25 +26,15 @@ export default async function PaymentPage({
 
     <>
       <Navbar />
-
-
       <main>
-
-        <Container className="py-16">
-
+        <Container className="py-24">
           <PaymentClient
             orderId={order}
           />
-
         </Container>
-
       </main>
-
-
       <Footer />
-
     </>
-
   );
 
 }

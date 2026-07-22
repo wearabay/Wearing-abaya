@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { usePathname } from "next/navigation";
 
 import Logo from "./Logo";
@@ -14,78 +13,91 @@ import SearchDrawer from "@/components/search/SearchDrawer";
 import { openCart } from "@/lib/cart-drawer";
 
 
-type NavbarProps = {
-  transparent?: boolean;
-};
-
-
-export default function Navbar({
-  transparent = false,
-}: NavbarProps) {
+export default function Navbar() {
 
   const pathname = usePathname();
 
-  const [searchOpen, setSearchOpen] = useState(false);
 
-  const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] =
+    useState(false);
+
+
+  const [scrolled, setScrolled] =
+    useState(false);
+
 
 
   useEffect(() => {
 
-    const onScroll = () => {
-      setScrolled(window.scrollY > 80);
+    const handleScroll = () => {
+
+      setScrolled(
+        window.scrollY > 80
+      );
+
     };
 
-    onScroll();
+
+    handleScroll();
+
 
     window.addEventListener(
       "scroll",
-      onScroll
+      handleScroll
     );
 
 
     return () =>
       window.removeEventListener(
         "scroll",
-        onScroll
+        handleScroll
       );
+
 
   }, []);
 
 
-  // Halaman yang memakai hero image
+
+
   const transparentPages = [
     "/",
     "/shop",
   ];
 
 
-  const allowTransparent =
-    transparentPages.includes(pathname);
+
+  const isTransparentPage =
+    transparentPages.includes(
+      pathname
+    );
 
 
-  // Menentukan warna navbar
-  const isDark =
-    scrolled ||
-    !transparent ||
-    !allowTransparent;
+
+  const darkNavbar =
+    !isTransparentPage ||
+    scrolled;
+
+
 
 
   return (
+
     <>
 
       <header
+
         className={`
           fixed
-          top-0
           left-0
           right-0
+          top-0
           z-50
+
           transition-all
           duration-500
 
           ${
-            isDark
+            darkNavbar
               ? `
                 bg-white/90
                 backdrop-blur-md
@@ -100,10 +112,12 @@ export default function Navbar({
               `
           }
         `}
+
       >
 
 
         <div
+
           className="
             mx-auto
             flex
@@ -113,46 +127,61 @@ export default function Navbar({
             justify-between
             px-6
           "
+
         >
 
 
           <Logo
-            dark={isDark}
+            dark={darkNavbar}
           />
+
 
 
           <NavbarMenu
-            dark={isDark}
+            dark={darkNavbar}
           />
 
 
+
           <NavbarIcons
-            dark={isDark}
+
+            dark={darkNavbar}
+
             onSearchClick={() =>
               setSearchOpen(true)
             }
+
             onCartClick={() =>
               openCart()
             }
+
           />
 
 
         </div>
 
+
       </header>
+
+
 
 
       <CartDrawer />
 
 
       <SearchDrawer
+
         open={searchOpen}
+
         onClose={() =>
           setSearchOpen(false)
         }
+
       />
 
 
     </>
+
   );
+
 }

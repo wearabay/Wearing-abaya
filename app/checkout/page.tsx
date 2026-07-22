@@ -22,7 +22,7 @@ export default function CheckoutPage() {
     <>
       <Navbar />
 
-      <Container className="py-16 lg:py-24">
+      <Container className="py-24 lg:py-24">
         <CheckoutHeader itemCount={count} />
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_420px]">
@@ -45,16 +45,10 @@ export default function CheckoutPage() {
           <aside className="h-fit space-y-6 self-start lg:sticky lg:top-28">
 
             <OrderSummary />
-
             <CheckoutActions />
-
           </aside>
-
-
         </div>
-
       </Container>
-
       <Footer />
     </>
   );

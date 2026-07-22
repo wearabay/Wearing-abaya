@@ -11,7 +11,7 @@ export default function CheckoutHeader({
 }: CheckoutHeaderProps) {
   return (
     <div className="border-b border-neutral-200 pb-6">
-      <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+      <p className="text-xs uppercase tracking-[0.3em] text-neutral-500 ">
         Secure Checkout
       </p>
 

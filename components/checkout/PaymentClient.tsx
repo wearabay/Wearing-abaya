@@ -81,10 +81,6 @@ export default function PaymentClient({
 
   }
 
-
-
-
-
   if (!order) {
 
     return (
@@ -114,16 +110,18 @@ export default function PaymentClient({
         ">
           This order may no longer exist.
         </p>
-
-
       </div>
-
     );
-
   }
 
-
-
+  const paymentLabel =
+  order.payment === "bank"
+    ? "Bank Transfer"
+    : order.payment === "ewallet"
+    ? "E-Wallet"
+    : order.payment === "qris"
+    ? "QRIS"
+    : "Cash on Delivery";
 
   return (
 
@@ -134,8 +132,6 @@ export default function PaymentClient({
         space-y-8
       "
     >
-
-
       {/* Header */}
 
       <section
@@ -188,7 +184,6 @@ export default function PaymentClient({
             {order.id}
           </p>
 
-
           <p
             className="
               text-sm
@@ -197,20 +192,10 @@ export default function PaymentClient({
           >
             Status: {order.status}
           </p>
-
-
         </div>
-
-
       </section>
 
-
-
-
-
       {/* Items */}
-
-
       <section
         className="
           rounded-2xl
@@ -230,8 +215,6 @@ export default function PaymentClient({
           Order Summary
         </h2>
 
-
-
         <div
           className="
             space-y-5
@@ -249,13 +232,11 @@ export default function PaymentClient({
                   text-sm
                 "
               >
-
                 <div>
 
                   <p>
                     {item.name}
                   </p>
-
 
                   <p className="
                     text-neutral-500
@@ -268,10 +249,7 @@ export default function PaymentClient({
                     {" "}
                     x {item.quantity}
                   </p>
-
                 </div>
-
-
                 <p>
                   {
                     formatPrice(
@@ -280,17 +258,10 @@ export default function PaymentClient({
                     )
                   }
                 </p>
-
-
               </div>
-
             )
           )}
-
         </div>
-
-
-
 
         <div
           className="
@@ -316,19 +287,10 @@ export default function PaymentClient({
               )
             }
           </span>
-
-
         </div>
-
-
       </section>
 
-
-
-
-
       {/* Payment Method */}
-
 
       <section
         className="
@@ -350,19 +312,12 @@ export default function PaymentClient({
         </h2>
 
 
-        <p className="text-sm">
-          {order.payment}
-        </p>
-
-
+        <p className="text-sm font-medium">
+ {paymentLabel}
+</p>
       </section>
 
-
-
-
-
       {/* Button */}
-
 
       <Button
         fullWidth

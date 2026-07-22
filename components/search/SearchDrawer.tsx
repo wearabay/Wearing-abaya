@@ -79,9 +79,9 @@ useEffect(() => {
       );
 
       const matchFeature =
-  product.features.some((feature) =>
+  product.features?.some((feature) =>
     feature.toLowerCase().includes(q)
-  );
+  ) ?? false;
 
   const matchDescription =
   product.description
@@ -89,11 +89,11 @@ useEffect(() => {
     .includes(q);
 
     const matchSpecification =
-  product.specifications.some((item) =>
+  product.specifications?.some((item) =>
     `${item.label} ${item.value}`
       .toLowerCase()
       .includes(q)
-  );
+  ) ?? false;
 
     return (
 
@@ -136,7 +136,7 @@ matchSpecification
       />
 
       <aside
-        className={`fixed inset-x-0 top-0 z-50 max h-[55dvh] overflow-y-auto rounded-b-3x1 bg-white shadow-2x1 transition-all duration-500 ease-out ${
+        className={`fixed inset-x-0 top-0 z-50 max-h-[55dvh] overflow-y-auto rounded-b-3x1 bg-white shadow-2x1 transition-all duration-500 ease-out ${
           open
             ? "translate-y-0"
             : "-translate-y-full"

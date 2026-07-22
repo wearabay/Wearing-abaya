@@ -12,7 +12,12 @@ const CART_KEY = "wearing-abaya-cart";
 
 export function getCart(): CartItem[] {
   if (typeof window === "undefined") return [];
-  return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+  try {
+    const data = localStorage.getItem(CART_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch {
+    return [];
+  }
 }
 
 export function saveCart(cart: CartItem[]) {

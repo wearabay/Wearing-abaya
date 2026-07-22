@@ -48,7 +48,7 @@ export default function OrderDetailClient({
   if (!order) {
 
     return (
-      <div className="py-20">
+      <div className="py-24">
 
         <h1 className="text-3xl font-light">
           Order Not Found

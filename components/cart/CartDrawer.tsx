@@ -11,6 +11,7 @@ import CartItemCard from "./CartItemCard";
 import CartSummary from "./CartSummary";
 
 export default function CartDrawer() {
+  
   const [open, setOpen] = useState(false);
   const [addedBanner, setAddedBanner] = useState(false);
 
