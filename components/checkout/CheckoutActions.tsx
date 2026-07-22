@@ -57,16 +57,16 @@ export default function CheckoutActions() {
 
         if (element) {
 
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
 
+  setTimeout(() => {
+    element.focus();
+  }, 500);
 
-          element.focus();
-
-        }
-
+}
 
       }, 100);
 

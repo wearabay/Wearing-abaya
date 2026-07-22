@@ -26,29 +26,58 @@ export default function SuccessClient({
   const [order, setOrder] =
     useState<Order | null>(null);
 
+  const [loading, setLoading] =
+    useState(true);
+
 
 
   useEffect(() => {
+  if (!orderId) {
+    setLoading(false);
+    return;
+  }
+  const data =
+    getOrderById(orderId);
+  setOrder(
+    data ?? null
+  );
+  setLoading(false);
+}, [orderId]);
 
-    if (!orderId) return;
+if (loading) {
+  return (
+    <div className="text-center text-neutral-500">
+      Loading order...
+    </div>
+  );
+}
 
 
-    const data =
-      getOrderById(orderId);
+if (!order) {
+  return (
+    <div className="mx-auto max-w-xl text-center">
 
+      <h1 className="text-3xl font-light">
+        Order Not Found
+      </h1>
 
-    setOrder(
-      data ?? null
-    );
+      <p className="mt-4 text-neutral-500">
+        This order may no longer exist.
+      </p>
 
+      <Button
+        href="/shop"
+        variant="outline"
+        className="mt-8"
+      >
+        Back To Shop
+      </Button>
 
-  }, [orderId]);
-
-
-
+    </div>
+  );
+}
 
   return (
-
     <div
       className="
         mx-auto
@@ -56,7 +85,6 @@ export default function SuccessClient({
         text-center
       "
     >
-
       <p
         className="
           text-xs
@@ -68,8 +96,6 @@ export default function SuccessClient({
         Order Confirmed
       </p>
 
-
-
       <h1
         className="
           mt-6
@@ -79,8 +105,6 @@ export default function SuccessClient({
       >
         Thank You For Your Order
       </h1>
-
-
 
       <p
         className="
@@ -94,9 +118,6 @@ export default function SuccessClient({
         We will prepare your order from
         Wearing Abaya.
       </p>
-
-
-
 
       {order && (
 
@@ -133,9 +154,6 @@ export default function SuccessClient({
 
           </div>
 
-
-
-
           <div className="
             flex
             justify-between
@@ -149,12 +167,7 @@ export default function SuccessClient({
             <span className="font-medium uppercase">
               {order.status}
             </span>
-
-
           </div>
-
-
-
 
           <div className="
             flex
@@ -169,19 +182,9 @@ export default function SuccessClient({
             <span className="font-medium">
               {formatPrice(order.subtotal)}
             </span>
-
-
           </div>
-
-
         </div>
-
       )}
-
-
-
-
-
 
       <div
         className="
@@ -191,7 +194,6 @@ export default function SuccessClient({
           gap-4
         "
       >
-
         {order && (
 
           <Button
@@ -202,9 +204,6 @@ export default function SuccessClient({
           </Button>
 
         )}
-
-
-
         <Button
           href="/shop"
           variant="outline"
@@ -212,12 +211,7 @@ export default function SuccessClient({
         >
           Continue Shopping
         </Button>
-
-
       </div>
-
-
-
     </div>
 
   );

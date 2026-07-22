@@ -44,22 +44,14 @@ export default async function OrderDetailPage({
       <Footer />
       </>
     );
-
   }
-
 
   return(
     <>
     <Navbar />
-
     <main>
-
     <Container className="py-24">
-
-
       <div className="space-y-10">
-
-
         <div>
           <p className="
             text-xs

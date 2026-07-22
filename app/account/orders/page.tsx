@@ -3,22 +3,10 @@ import Footer from "@/components/layout/Footer";
 
 import Container from "@/components/ui/Container";
 
-import OrderDetailClient from "@/components/account/OrderDetailClient";
+import OrdersClient from "@/components/account/OrdersClient";
 
 
-type Props = {
-  params: Promise<{
-    id:string;
-  }>;
-};
-
-
-export default async function Page({
-  params,
-}:Props){
-
-  const {id}=await params;
-
+export default function OrdersPage() {
 
   return (
     <>
@@ -27,9 +15,7 @@ export default async function Page({
       <main>
         <Container className="py-24">
 
-          <OrderDetailClient
-            orderId={id}
-          />
+          <OrdersClient />
 
         </Container>
       </main>
@@ -37,4 +23,5 @@ export default async function Page({
       <Footer />
     </>
   );
+
 }

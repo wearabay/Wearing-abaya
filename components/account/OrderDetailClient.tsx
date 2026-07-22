@@ -32,20 +32,33 @@ export default function OrderDetailClient({
 
 
   const [order, setOrder] =
-    useState<Order | null>(null);
+  useState<Order | null>(null);
+
+const [loading, setLoading] =
+  useState(true);
 
 
   useEffect(() => {
+  const data =
+    getOrderById(orderId);
+  setOrder(
+    data ?? null
+  );
+  setLoading(false);
+}, [orderId]);
 
-    setOrder(
-      getOrderById(orderId) ?? null
-    );
 
-  }, [orderId]);
+if (loading) {
 
+  return (
+    <div className="py-24 text-center text-neutral-500">
+      Loading order...
+    </div>
+  );
 
-
-  if (!order) {
+}
+  
+if (!order) {
 
     return (
       <div className="py-24">
@@ -59,12 +72,8 @@ export default function OrderDetailClient({
 
   }
 
-
-
   const currentIndex =
     steps.indexOf(order.status);
-
-
 
   return (
 

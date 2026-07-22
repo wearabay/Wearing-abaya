@@ -44,7 +44,9 @@ export type Order = {
 };
 
 
-const ORDER_KEY = "wearing-abaya-orders";
+
+const ORDER_KEY =
+  "wearing-abaya-orders";
 
 
 
@@ -54,12 +56,11 @@ export function createOrder(
 
   if (
     typeof window === "undefined"
-  ) {
-    return null;
-  }
+  ) return;
 
 
-  const orders = getOrders();
+  const orders =
+    getOrders();
 
 
   orders.push(order);
@@ -74,6 +75,7 @@ export function createOrder(
   return order;
 
 }
+
 
 
 
@@ -99,7 +101,6 @@ export function getOrders(): Order[] {
       ? JSON.parse(data)
       : [];
 
-
   } catch {
 
     return [];
@@ -111,9 +112,11 @@ export function getOrders(): Order[] {
 
 
 
+
 export function getOrderById(
   id: string
-) {
+): Order | undefined {
+
 
   const orders =
     getOrders();
@@ -129,63 +132,49 @@ export function getOrderById(
 
 
 
+
 export function updateOrderStatus(
   id: string,
   status: OrderStatus
 ) {
 
+
   if (
     typeof window === "undefined"
-  ) {
-    return;
-  }
+  ) return;
 
 
   const orders =
     getOrders();
 
 
-  const updated =
-    orders.map((order)=>{
 
-      if(order.id === id){
-
-        return {
-          ...order,
-          status,
-        };
-
-      }
-
-
-      return order;
-
-    });
+  const updatedOrders =
+    orders.map(
+      (order) =>
+        order.id === id
+          ? {
+              ...order,
+              status,
+            }
+          : order
+    );
 
 
 
   localStorage.setItem(
     ORDER_KEY,
-    JSON.stringify(updated)
+    JSON.stringify(
+      updatedOrders
+    )
   );
 
 
-}
-
-
-
-
-export function clearOrders(){
-
-  if(
-    typeof window === "undefined"
-  ){
-    return;
-  }
-
-
-  localStorage.removeItem(
-    ORDER_KEY
+  window.dispatchEvent(
+    new Event("orders-updated")
   );
+
+
+  return updatedOrders;
 
 }
