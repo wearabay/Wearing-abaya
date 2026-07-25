@@ -3,413 +3,147 @@
 import { useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
 
+import AddressCard from "./AddressCard";
+import AddressForm from "./AddressForm";
+import EmptyAddress from "./EmptyAddress";
 
-type Address = {
-  id: string;
-  label: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  province: string;
-  postalCode: string;
-  isDefault: boolean;
-};
+import {
+  getAddresses,
+  addAddress,
+  updateAddress,
+  deleteAddress,
+  setDefaultAddress,
+} from "@/lib/addresses";
 
-
-const STORAGE_KEY =
-  "wearing-abaya-addresses";
-
+import type { Address } from "@/types/address";
 
 export default function AddressBook() {
+  const [addresses, setAddresses] = useState<Address[]>([]);
 
+  const [open, setOpen] = useState(false);
 
-  const [addresses, setAddresses] =
-    useState<Address[]>([]);
+  const [editing, setEditing] = useState<
+    Address | undefined
+  >();
 
+  const refreshAddresses = () => {
+    setAddresses(getAddresses());
+  };
 
-  const [form, setForm] =
-    useState({
+  useEffect(() => {
+    refreshAddresses();
+  }, []);
 
-      label:"Home",
-      name:"",
-      phone:"",
-      address:"",
-      city:"",
-      province:"",
-      postalCode:"",
+  const handleAdd = () => {
+    setEditing(undefined);
+    setOpen(true);
+  };
 
-    });
+  const handleEdit = (address: Address) => {
+    setEditing(address);
+    setOpen(true);
+  };
 
+  const handleDelete = (id: string) => {
+    const confirmed = window.confirm(
+      "Delete this address?"
+    );
 
+    if (!confirmed) return;
 
-  useEffect(()=>{
+    deleteAddress(id);
 
-    const saved =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
+    refreshAddresses();
+  };
 
+  const handleSetDefault = (id: string) => {
+    setDefaultAddress(id);
 
-    if(saved){
+    refreshAddresses();
+  };
 
-      setAddresses(
-        JSON.parse(saved)
-      );
-
+  const handleSave = (address: Address) => {
+    if (editing) {
+      updateAddress(address);
+    } else {
+      addAddress(address);
     }
 
-  },[]);
+    refreshAddresses();
 
+    setOpen(false);
 
-
-
-  function saveAddresses(
-    data:Address[]
-  ){
-
-    setAddresses(data);
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(data)
-    );
-
-  }
-
-
-
-
-  function updateField(
-    field:keyof typeof form,
-    value:string
-  ){
-
-    setForm(prev=>({
-
-      ...prev,
-
-      [field]:value,
-
-    }));
-
-  }
-
-
-
-
-  function addAddress(){
-
-
-    const newAddress:Address={
-
-      id:
-        Date.now().toString(),
-
-      ...form,
-
-      isDefault:
-        addresses.length === 0,
-
-    };
-
-
-    saveAddresses([
-
-      ...addresses,
-
-      newAddress,
-
-    ]);
-
-
-    setForm({
-
-      label:"Home",
-      name:"",
-      phone:"",
-      address:"",
-      city:"",
-      province:"",
-      postalCode:"",
-
-    });
-
-  }
-
-
-
-
-  function deleteAddress(
-    id:string
-  ){
-
-    saveAddresses(
-
-      addresses.filter(
-        item=>item.id!==id
-      )
-
-    );
-
-  }
-
-
-
-
+    setEditing(undefined);
+  };
 
   return (
+    <>
 
-    <div className="space-y-12">
+      <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
 
+  <div>
 
-      <div>
+    <h2 className="text-2xl font-semibold">
+      My Addresses
+    </h2>
 
-        <p className="
-          text-xs
-          uppercase
-          tracking-[0.3em]
-          text-neutral-500
-        ">
-          Account
-        </p>
+    <p className="mt-1 text-neutral-500">
+      Manage your shipping addresses.
+    </p>
 
+  </div>
 
-        <h1 className="
-          mt-3
-          text-4xl
-          font-light
-        ">
-          Addresses
-        </h1>
+  <Button
+    fullWidth
+    className="md:w-auto"
+    onClick={handleAdd}
+  >
+    Add Address
+  </Button>
 
+</div>
 
-      </div>
+      {addresses.length === 0 ? (
 
+        <EmptyAddress />
 
+      ) : (
 
+        <div className="space-y-6">
 
-      {/* Existing */}
+          {addresses.map((address) => (
 
-      <div className="space-y-5">
-
-        {addresses.map(address=>(
-
-          <div
-            key={address.id}
-            className="
-              rounded-2xl
-              border
-              border-stone-200
-              p-6
-            "
-          >
-
-            <div className="
-              flex
-              justify-between
-            ">
-
-              <h2 className="font-medium">
-                {address.label}
-              </h2>
-
-
-              {address.isDefault && (
-
-                <span className="
-                  text-xs
-                  uppercase
-                  tracking-widest
-                  text-neutral-500
-                ">
-                  Default
-                </span>
-
-              )}
-
-            </div>
-
-
-
-            <div className="
-              mt-4
-              text-sm
-              leading-7
-              text-neutral-600
-            ">
-
-              <p>
-                {address.name}
-              </p>
-
-              <p>
-                {address.phone}
-              </p>
-
-              <p>
-                {address.address}
-              </p>
-
-              <p>
-                {address.city},
-                {" "}
-                {address.province}
-              </p>
-
-              <p>
-                {address.postalCode}
-              </p>
-
-
-            </div>
-
-
-
-            <button
-              onClick={()=>
-                deleteAddress(address.id)
+            <AddressCard
+              key={address.id}
+              address={address}
+              onEdit={() =>
+                handleEdit(address)
               }
-              className="
-                mt-5
-                text-xs
-                uppercase
-                tracking-widest
-                text-red-500
-              "
-            >
-              Delete
-            </button>
+              onDelete={() =>
+                handleDelete(address.id)
+              }
+              onSetDefault={() =>
+                handleSetDefault(address.id)
+              }
+            />
 
+          ))}
 
-          </div>
+        </div>
 
-        ))}
+      )}
 
-      </div>
+      <AddressForm
+        open={open}
+        initialData={editing}
+        onClose={() => {
+          setOpen(false);
+          setEditing(undefined);
+        }}
+        onSave={handleSave}
+      />
 
-
-
-
-
-      {/* Add New */}
-
-
-      <section
-        className="
-          rounded-2xl
-          border
-          border-stone-200
-          p-8
-          space-y-5
-        "
-      >
-
-        <h2 className="text-lg">
-          Add New Address
-        </h2>
-
-
-
-        <Input
-          label="Label"
-          value={form.label}
-          onChange={(e)=>
-            updateField(
-              "label",
-              e.target.value
-            )
-          }
-        />
-
-
-        <Input
-          label="Name"
-          value={form.name}
-          onChange={(e)=>
-            updateField(
-              "name",
-              e.target.value
-            )
-          }
-        />
-
-
-        <Input
-          label="Phone"
-          value={form.phone}
-          onChange={(e)=>
-            updateField(
-              "phone",
-              e.target.value
-            )
-          }
-        />
-
-
-        <Input
-          label="Address"
-          value={form.address}
-          onChange={(e)=>
-            updateField(
-              "address",
-              e.target.value
-            )
-          }
-        />
-
-
-        <Input
-          label="City"
-          value={form.city}
-          onChange={(e)=>
-            updateField(
-              "city",
-              e.target.value
-            )
-          }
-        />
-
-
-        <Input
-          label="Province"
-          value={form.province}
-          onChange={(e)=>
-            updateField(
-              "province",
-              e.target.value
-            )
-          }
-        />
-
-
-        <Input
-          label="Postal Code"
-          value={form.postalCode}
-          onChange={(e)=>
-            updateField(
-              "postalCode",
-              e.target.value
-            )
-          }
-        />
-
-
-
-        <Button
-          onClick={addAddress}
-        >
-          Save Address
-        </Button>
-
-
-      </section>
-
-
-    </div>
-
+    </>
   );
-
 }

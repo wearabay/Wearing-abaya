@@ -1,24 +1,22 @@
+import Container from "@/components/ui/Container";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-import Container from "@/components/ui/Container";
-
 import AddressBook from "@/components/account/AddressBook";
 
-
 export default function AddressesPage() {
-
   return (
     <>
       <Navbar />
 
-      <main>
-        <Container className="py-24">
+      <Container className="py-24 max-w-5xl">
 
-          <AddressBook />
+        <h1 className="mb-8 text-3xl font-bold">
+          My Addresses
+        </h1>
 
-        </Container>
-      </main>
+        <AddressBook />
+
+      </Container>
 
       <Footer />
     </>
