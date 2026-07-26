@@ -70,12 +70,8 @@ export default function CitySelect({
       >
 
         <option value="">
-          {
-            province
-              ? "Select City"
-              : "Select Province First"
-          }
-        </option>
+  {province ? "Select City" : "Select Province"}
+</option>
 
 
 
