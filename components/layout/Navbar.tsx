@@ -66,27 +66,13 @@ export default function Navbar({
 
 
 
-  const transparentPages = [
-    "/",
-    "/shop",
-  ];
-
-
-
   const isTransparentPage =
-    transparentPages.includes(
-      pathname
-    );
+  pathname === "/" ||
+  pathname === "/shop";
 
-
-
-  const darkNavbar =
-  !transparent &&
-  !isTransparentPage
-    ? true
-    : scrolled || !isTransparentPage;
-
-
+const darkNavbar = isTransparentPage
+  ? scrolled
+  : true;
 
 
   return (

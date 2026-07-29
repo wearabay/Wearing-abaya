@@ -9,7 +9,7 @@ export default function NavbarMenu({
   dark = false,
 }: Props) {
   return (
-    <nav className="hidden items-center gap-10 lg:flex">
+    <nav className="flex items-center gap-10">
 
       {navigation.map((item) => (
 

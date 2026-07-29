@@ -13,7 +13,7 @@ import Footer from "../components/layout/Footer";
 export default function Home() {
   return (
 <>
-  <Navbar transparent />
+  
   <Hero />
   <FeaturedCollections />
   <FeaturedProducts />
@@ -21,7 +21,7 @@ export default function Home() {
   <BrandValues />
   <InstagramGallery />
   <Newsletter />
-  <Footer />
+  
 </>
 
   );
