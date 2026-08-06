@@ -41,7 +41,7 @@ export default function JournalSection() {
               </h3>
 
               <p className="mt-5 leading-8 text-neutral-600">
-                Every Wearing Abaya piece is crafted with premium fabrics,
+                Every Wearabay piece is crafted with premium fabrics,
                 elegant silhouettes and timeless details designed for women
                 who appreciate understated luxury.
               </p>

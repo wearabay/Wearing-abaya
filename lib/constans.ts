@@ -1,1 +1,1 @@
-export const BRAND_NAME = "Wearing Abaya";
+export const BRAND_NAME = "wearabay";

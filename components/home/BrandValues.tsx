@@ -43,7 +43,7 @@ export default function BrandValues() {
         <SectionTitle
           eyebrow="Our Values"
           title="Luxury Is Found In Every Detail"
-          description="Every Wearing Abaya piece is created with quality, craftsmanship and timeless elegance."
+          description="Every Wearabay piece is created with quality, craftsmanship and timeless elegance."
         />
 
         <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 text-neutral-700">

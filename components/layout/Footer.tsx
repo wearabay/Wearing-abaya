@@ -11,12 +11,13 @@ export default function Footer() {
         <div>
 
           <h3 className="text-2xl font-light tracking-[0.18em]">
-            WEARING
+            WEARABAY
           </h3>
 
           <p className="mt-1 text-xs uppercase tracking-[0.60em]">
-            ABAYA
+            MODEST FASHION
           </p>
+
 
           <p className="mt-8 leading-8 text-neutral-500">
             Timeless modest fashion crafted with premium fabrics,
@@ -24,6 +25,7 @@ export default function Footer() {
           </p>
 
         </div>
+
 
         {/* Shop */}
 
@@ -33,6 +35,7 @@ export default function Footer() {
             Shop
           </h4>
 
+
           <ul className="space-y-4 text-neutral-500">
 
             <li>
@@ -41,17 +44,20 @@ export default function Footer() {
               </Link>
             </li>
 
+
             <li>
               <Link href="/shop?category=abaya">
                 Abaya
               </Link>
             </li>
 
+
             <li>
               <Link href="/shop?category=dress">
                 Dress
               </Link>
             </li>
+
 
             <li>
               <Link href="/shop?category=mukena">
@@ -63,6 +69,7 @@ export default function Footer() {
 
         </div>
 
+
         {/* Company */}
 
         <div>
@@ -70,6 +77,7 @@ export default function Footer() {
           <h4 className="mb-6 uppercase tracking-[0.25em] text-sm">
             Company
           </h4>
+
 
           <ul className="space-y-4 text-neutral-500">
 
@@ -79,11 +87,13 @@ export default function Footer() {
               </Link>
             </li>
 
+
             <li>
               <Link href="/journal">
                 Journal
               </Link>
             </li>
+
 
             <li>
               <Link href="/contact">
@@ -95,6 +105,7 @@ export default function Footer() {
 
         </div>
 
+
         {/* Social */}
 
         <div>
@@ -103,30 +114,36 @@ export default function Footer() {
             Follow
           </h4>
 
+
           <ul className="space-y-4 text-neutral-500">
 
             <li>
               <a
                 href="https://instagram.com/wearing.abaya"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Instagram
               </a>
             </li>
 
+
             <li>
               <a
                 href="https://tiktok.com/@wearabay"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 TikTok
               </a>
             </li>
 
+
             <li>
               <a
                 href="https://wa.me/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 WhatsApp
               </a>
@@ -136,17 +153,22 @@ export default function Footer() {
 
         </div>
 
+
       </div>
+
 
       {/* Bottom */}
 
       <div className="border-t">
 
+
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-neutral-500 md:flex-row">
 
+
           <p>
-            © 2026 Wearing Abaya. All rights reserved.
+            © 2026 wearabay. All rights reserved.
           </p>
+
 
           <div className="flex gap-8">
 
@@ -154,15 +176,20 @@ export default function Footer() {
               Privacy
             </Link>
 
+
             <Link href="/terms">
               Terms
             </Link>
 
+
           </div>
+
 
         </div>
 
+
       </div>
+
 
     </footer>
   );

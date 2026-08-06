@@ -12,7 +12,7 @@ export default function InstagramGallery() {
 
         <SectionTitle
           eyebrow="Follow Our Journey"
-          title='wearing.abaya'
+          title='wearabay'
           description="Discover timeless elegance through our latest collections, styling inspiration and behind-the-scenes moments."
         />
 

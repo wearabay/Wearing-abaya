@@ -78,7 +78,7 @@ export default function ProductDetails({
         title="Craftsmanship"
       >
         <p>
-          Every Wearing Abaya piece is handcrafted using premium fabrics and refined finishing techniques to ensure timeless elegance and exceptional quality.
+          Every Wearabay piece is handcrafted using premium fabrics and refined finishing techniques to ensure timeless elegance and exceptional quality.
 </p>
       </ProductAccordion>
 

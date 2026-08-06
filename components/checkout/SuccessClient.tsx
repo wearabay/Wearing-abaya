@@ -116,7 +116,7 @@ if (!order) {
       >
         Your order has been received.
         We will prepare your order from
-        Wearing Abaya.
+        wearabay.
       </p>
 
       {order && (

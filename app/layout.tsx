@@ -25,89 +25,173 @@ const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "http://localhost:3000";
 
+
 export const metadata: Metadata = {
+
   metadataBase: new URL(baseUrl),
 
+
   title: {
-    default: "Wearing.abaya",
-    template: "%s | Wearing.abaya",
+    default: "wearabay",
+    template: "%s | wearabay",
   },
 
+
   description:
-    "Luxury modest fashion crafted for the modern Muslimah.",
+    "Premium modest fashion crafted for the modern Muslimah.",
+
 
   keywords: [
+    "wearabay",
     "abaya",
     "modest fashion",
     "muslim fashion",
-    "wearing abaya",
     "premium abaya",
     "luxury abaya",
     "muslimah clothing",
     "indonesia abaya",
   ],
 
+
   authors: [
     {
-      name: "Wearing.abaya",
+      name: "wearabay",
     },
   ],
 
-  creator: "Wearing.abaya",
 
-  publisher: "Wearing.abaya",
+  creator: "wearabay",
+
+  publisher: "wearabay",
+
+
 
   openGraph: {
+
     type: "website",
+
     locale: "en_US",
-    siteName: "Wearing.abaya",
+
+    siteName: "wearabay",
+
     url: baseUrl,
+
+    title:
+      "wearabay | Premium Modest Fashion",
+
+    description:
+      "Premium modest fashion crafted for the modern Muslimah.",
+
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt:
+          "wearabay - Premium Modest Fashion",
+      },
+    ],
+
   },
+
+
 
   twitter: {
-    card: "summary_large_image",
-    creator: "@wearingabaya",
+
+    card:
+      "summary_large_image",
+
+    title:
+      "wearabay | Premium Modest Fashion",
+
+    description:
+      "Premium modest fashion crafted for the modern Muslimah.",
+
+    images: [
+      "/og-image.jpg",
+    ],
+
+    creator:
+      "@wearabay",
+
   },
+
+
 
   robots: {
+
     index: true,
+
     follow: true,
+
   },
 
+
+
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+
+    icon:
+      "/favicon.ico",
+
+    shortcut:
+      "/favicon.ico",
+
+    apple:
+      "/apple-touch-icon.png",
+
   },
+
+
 };
+
+
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
+
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+
       <body className="min-h-full flex flex-col">
+
         <CartProvider>
+
           <CheckoutProvider>
+
             <Toast />
 
             <Navbar />
 
+
             <main className="flex-1">
+
               {children}
+
             </main>
+
 
             <Footer />
 
+
             <BackToTop />
+
           </CheckoutProvider>
+
         </CartProvider>
+
+
       </body>
+
+
     </html>
+
   );
+
 }

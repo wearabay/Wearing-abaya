@@ -73,7 +73,7 @@ export default function ContactForm() {
           <span className="text-sm leading-6 text-neutral-600">
             Email me with exclusive offers,
             new arrivals, and updates from
-            Wearing Abaya.
+            wearabay.
           </span>
         </label>
       </div>

@@ -32,7 +32,7 @@ export default function ArticleJsonLd({
 
     publisher: {
       "@type": "Organization",
-      name: "Wearing.abaya",
+      name: "wearabay",
     },
 
     datePublished: publishedAt,

@@ -29,7 +29,7 @@ Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 coverImage:
 "/images/journal/abaya-size.jpg",
 
-author:"Wearing.abaya",
+author:"wearabay",
 
 authorRole:"Editorial Team",
 
@@ -75,7 +75,7 @@ Donec condimentum.
 coverImage:
 "/images/journal/abaya-vs-kaftan.jpg",
 
-author:"Wearing.abaya",
+author:"wearabay",
 
 authorRole:"Editorial Team",
 
@@ -117,7 +117,7 @@ Vestibulum viverra.
 coverImage:
 "/images/journal/style-black-abaya.jpg",
 
-author:"Wearing.abaya",
+author:"wearabay",
 
 authorRole:"Editorial Team",
 
@@ -161,7 +161,7 @@ Vivamus consequat.
 coverImage:
 "/images/journal/nida-care.jpg",
 
-author:"Wearing.abaya",
+author:"wearabay",
 
 authorRole:"Editorial Team",
 
@@ -185,7 +185,7 @@ id:"5",
 
 slug:"behind-our-craftsmanship",
 
-title:"Behind Wearing.abaya Craftsmanship",
+title:"Behind Wearabay Craftsmanship",
 
 excerpt:
 "Every collection begins with thoughtful design, premium materials, and skilled artisans.",
@@ -203,7 +203,7 @@ Etiam feugiat.
 coverImage:
 "/images/journal/craftsmanship.jpg",
 
-author:"Wearing.abaya",
+author:"wearabay",
 
 authorRole:"Editorial Team",
 
@@ -247,7 +247,7 @@ Sed posuere.
 coverImage:
 "/images/journal/ramadan.jpg",
 
-author:"Wearing.abaya",
+author:"wearabay",
 
 authorRole:"Editorial Team",
 

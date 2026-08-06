@@ -12,13 +12,15 @@ export default function Logo({ dark = false }: LogoProps) {
         dark ? "text-neutral-900" : "text-white"
       }`}
     >
+
       <span className="text-2xl font-light tracking-[0.18em]">
-        WEARING
+        WEARABAY
       </span>
 
       <span className="text-[11px] uppercase tracking-[0.65em]">
-        ABAYA
+        MODEST FASHION
       </span>
+
     </Link>
   );
 }

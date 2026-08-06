@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="absolute inset-0">
   <Image
     src="/images/hero/hero.jpg"
-    alt="Wearing Abaya Hero"
+    alt="wearabay Hero"
     fill
     priority
     sizes="100vw"

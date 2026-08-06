@@ -13,7 +13,7 @@ export default function JournalHero() {
             text-neutral-500
           "
         >
-          Wearing.abaya Journal
+          Wearabay Journal
         </span>
 
         <h1
@@ -44,7 +44,7 @@ export default function JournalHero() {
         >
           Discover styling advice, fabric care,
           behind-the-scenes stories, and inspiration
-          curated by Wearing.abaya.
+          curated by Wearabay.
         </p>
 
       </div>

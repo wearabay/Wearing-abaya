@@ -30,12 +30,12 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Article Not Found | Wearing.abaya",
+      title: "Article Not Found | wearabay",
     };
   }
 
   return {
-    title: `${article.title} | Wearing.abaya Journal`,
+    title: `${article.title} | wearabay Journal`,
 
     description: article.excerpt,
 
@@ -46,7 +46,7 @@ export async function generateMetadata({
 
   url: `${baseUrl}/journal/${article.slug}`,
 
-  siteName: "Wearing.abaya",
+  siteName: "wearabay",
 
   type: "article",
 

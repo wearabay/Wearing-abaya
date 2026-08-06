@@ -18,7 +18,7 @@ export default function AccountOverview() {
 
         <p className="text-sm uppercase tracking-[0.22em] text-neutral-500">
 
-          Wearing Abaya
+          wearabay
 
         </p>
 

@@ -19,7 +19,7 @@ export default function AuthorCard({
       </p>
 
       <p className="mt-6 max-w-2xl leading-8 text-neutral-600">
-        Wearing.abaya Editorial creates timeless stories about
+        Wearabay Editorial creates timeless stories about
         modest fashion, craftsmanship, premium fabrics, and
         everyday elegance for the modern Muslimah.
       </p>
