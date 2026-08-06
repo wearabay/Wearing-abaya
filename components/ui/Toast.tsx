@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 
 export default function Toast() {
-    console.log("Toast mounted");
+    
 
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
