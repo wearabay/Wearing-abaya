@@ -27,8 +27,8 @@ export default function Hero() {
           Premium Modest Fashion
         </p>
 
-        <h1 className="text-5xl md:text-7xl xl:text-8xl font-light tracking-[0.25em]">
-          WEARING ABAYA
+        <h1 className="text-5xl md:text-7xl xl:text-8xl font-light tracking-[0.35em]">
+          WEARABAY
         </h1>
 
         <p className="mt-8 max-w-2xl text-lg md:text-xl font-light leading-8 text-white/90">
