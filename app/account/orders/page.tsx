@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 
 import Container from "@/components/ui/Container";
 
@@ -10,7 +9,7 @@ export default function OrdersPage() {
 
   return (
     <>
-      <Navbar />
+      
 
       <main>
         <Container className="py-24">
@@ -20,7 +19,7 @@ export default function OrdersPage() {
         </Container>
       </main>
 
-      <Footer />
+      
     </>
   );
 

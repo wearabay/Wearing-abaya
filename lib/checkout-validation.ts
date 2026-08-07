@@ -17,14 +17,60 @@ type Address = {
   country: string;
   province: string;
   city: string;
+  district: string;
   postalCode: string;
   street: string;
   apartment: string;
 };
 
 
+/*
+  EMAIL VALIDATION
+
+  Allowed:
+  - gmail.com
+  - yahoo.com
+  - co.id
+  - net
+  - org
+
+*/
+
 const emailRegex =
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.id|net|org)$/i;
+const blockedEmailPatterns = [
+  "gmail.con",
+  "gmail.c",
+  "yahoo.con",
+  "hotmail.con",
+];
+
+
+/*
+  INDONESIA PHONE VALIDATION
+
+  Allowed:
+  081234567890
+  +6281234567890
+  6281234567890
+
+*/
+
+const phoneRegex =
+  /^(?:\+62|62|0)8[1-9][0-9]{7,10}$/;
+
+
+
+/*
+  POSTAL CODE INDONESIA
+
+  Example:
+  51111
+*/
+
+const postalRegex =
+  /^[0-9]{5}$/;
+
 
 
 
@@ -38,40 +84,79 @@ export function validateCheckout(
 
 
 
-  if (!contact.email.trim()) {
-
-    errors.email =
-      "Email is required.";
-
-  } else if (
-    !emailRegex.test(contact.email)
-  ) {
-
-    errors.email =
-      "Please enter a valid email address.";
-
-  }
+  /*
+    CONTACT
+  */
 
 
+  // Email
 
-  if (!contact.phone.trim()) {
+  const email =
+  contact.email
+    .trim()
+    .toLowerCase();
+
+
+if (!email) {
+
+  errors.email =
+    "Email is required.";
+
+} else if (
+  !emailRegex.test(email)
+) {
+
+  errors.email =
+    "Please enter a valid email address.";
+
+} else if (
+  blockedEmailPatterns.some(
+    (item) =>
+      email.includes(item)
+  )
+) {
+
+  errors.email =
+    "Please check your email address.";
+
+}
+
+
+
+  // Phone
+
+  const cleanPhone =
+    contact.phone
+      .replace(/\s|-/g, "")
+      .trim();
+
+
+
+  if (!cleanPhone) {
 
     errors.phone =
       "Phone number is required.";
 
   } else if (
-    contact.phone.replace(/\D/g, "").length < 9
+    !phoneRegex.test(cleanPhone)
   ) {
 
     errors.phone =
-      "Phone number is too short.";
+      "Please enter a valid Indonesian phone number.";
 
   }
 
 
 
 
-  if (!address.firstName.trim()) {
+  /*
+    SHIPPING ADDRESS
+  */
+
+
+  if (
+    !address.firstName.trim()
+  ) {
 
     errors.firstName =
       "First name is required.";
@@ -79,7 +164,10 @@ export function validateCheckout(
   }
 
 
-  if (!address.lastName.trim()) {
+
+  if (
+    !address.lastName.trim()
+  ) {
 
     errors.lastName =
       "Last name is required.";
@@ -87,7 +175,10 @@ export function validateCheckout(
   }
 
 
-  if (!address.province.trim()) {
+
+  if (
+    !address.province.trim()
+  ) {
 
     errors.province =
       "Province is required.";
@@ -95,15 +186,29 @@ export function validateCheckout(
   }
 
 
-  if (!address.city.trim()) {
+
+  if (
+    !address.city.trim()
+  ) {
 
     errors.city =
       "City is required.";
 
   }
 
+  if (
+  !address.district.trim()
+) {
 
-  if (!address.street.trim()) {
+  errors.district =
+    "District is required.";
+
+}
+
+
+  if (
+    !address.street.trim()
+  ) {
 
     errors.street =
       "Street address is required.";
@@ -111,17 +216,31 @@ export function validateCheckout(
   }
 
 
-  if (!address.postalCode.trim()) {
+
+  if (
+    !address.postalCode.trim()
+  ) {
 
     errors.postalCode =
       "Postal code is required.";
 
+  } else if (
+    !postalRegex.test(
+      address.postalCode.trim()
+    )
+  ) {
+
+    errors.postalCode =
+      "Please enter a valid postal code.";
+
   }
+
 
 
   return errors;
 
 }
+
 
 
 

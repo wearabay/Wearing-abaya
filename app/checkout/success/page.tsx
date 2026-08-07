@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 
 import Container from "@/components/ui/Container";
 
@@ -27,7 +26,7 @@ export default async function SuccessPage({
   return (
 
     <>
-      <Navbar />
+      
 
 
       <main>
@@ -43,7 +42,7 @@ export default async function SuccessPage({
       </main>
 
 
-      <Footer />
+      
 
     </>
 

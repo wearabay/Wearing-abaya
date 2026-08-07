@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 
 import Container from "@/components/ui/Container";
 
@@ -25,7 +24,7 @@ export default async function PaymentPage({
   return (
 
     <>
-      <Navbar />
+      
       <main>
         <Container className="py-24">
           <PaymentClient
@@ -33,7 +32,7 @@ export default async function PaymentPage({
           />
         </Container>
       </main>
-      <Footer />
+      
     </>
   );
 

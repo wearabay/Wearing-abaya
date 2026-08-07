@@ -2,23 +2,36 @@
 
 import Input from "@/components/ui/Input";
 import { useCheckout } from "@/context/CheckoutContext";
+import ProvinceSelect from "@/components/address/ProvinceSelect";
+import CitySelect from "@/components/address/CitySelect";
+import DistrictSelect from "@/components/address/DistrictSelect";
 
 export default function ShippingAddress() {
   const {
-    address,
-    errors,
-    setAddress,
-  } = useCheckout();
+  address,
+  errors,
+  setAddress,
+  setErrors,
+} = useCheckout();
 
   function updateField(
-    field: keyof typeof address,
-    value: string
-  ) {
-    setAddress((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  }
+  field: keyof typeof address,
+  value: string
+) {
+
+  setAddress((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+
+
+  // remove error after user starts correcting input
+  setErrors((prev) => ({
+    ...prev,
+    [field]: "",
+  }));
+
+}
 
   return (
     <section className="rounded-2xl border border-stone-200 bg-white p-6">
@@ -75,28 +88,81 @@ export default function ShippingAddress() {
 
         {/* Province */}
 
-        <Input
-  id="province"
-  label="Province"
-  placeholder="Central Java"
+<ProvinceSelect
+
   value={address.province}
+
   error={errors.province}
-  onChange={(e) =>
-    updateField("province", e.target.value)
-  }
+
+  onChange={(value) => {
+
+    updateField(
+      "province",
+      value
+    );
+
+
+    // reset child fields
+    updateField(
+      "city",
+      ""
+    );
+
+    updateField(
+      "district",
+      ""
+    );
+
+  }}
+
 />
 
-        {/* City */}
 
-        <Input
-  id="city"
-  label="City"
-  placeholder="Pekalongan"
+
+{/* City */}
+
+<CitySelect
+
+  province={address.province}
+
   value={address.city}
+
   error={errors.city}
-  onChange={(e) =>
-    updateField("city", e.target.value)
+
+  onChange={(value) => {
+
+    updateField(
+      "city",
+      value
+    );
+
+
+    updateField(
+      "district",
+      ""
+    );
+
+  }}
+
+/>
+
+<DistrictSelect
+
+  province={address.province}
+
+  city={address.city}
+
+  value={address.district}
+
+  error={errors.district}
+
+  onChange={(value) =>
+    updateField(
+      "district",
+      value
+    )
   }
+
 />
 
         {/* Postal */}

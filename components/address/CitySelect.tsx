@@ -8,6 +8,7 @@ import {
 type CitySelectProps = {
   province: string;
   value: string;
+  error?: string;
   onChange: (value: string) => void;
 };
 
@@ -15,6 +16,7 @@ type CitySelectProps = {
 export default function CitySelect({
   province,
   value,
+  error,
   onChange,
 }: CitySelectProps) {
 
@@ -36,6 +38,7 @@ export default function CitySelect({
 
 
       <label
+        htmlFor="city"
         className="
           text-xs
           uppercase
@@ -43,35 +46,59 @@ export default function CitySelect({
           text-neutral-600
         "
       >
-        City
+        City / Regency
       </label>
 
 
 
       <select
+
+        id="city"
+
         value={value}
+
         disabled={!province}
+
         onChange={(e) =>
           onChange(e.target.value)
         }
-        className="
+
+        aria-invalid={!!error}
+
+        className={`
           h-14
           w-full
           rounded-md
           border
-          border-neutral-300
           bg-white
           px-5
           outline-none
           transition
+
+          ${
+            error
+              ? "border-red-400"
+              : "border-neutral-300"
+          }
+
+          disabled:cursor-not-allowed
           disabled:bg-neutral-100
+          disabled:text-neutral-400
+
           focus:border-black
-        "
+        `}
+
       >
 
         <option value="">
-  {province ? "Select City" : "Select Province"}
-</option>
+
+          {
+            province
+              ? "Select City / Regency"
+              : "Select Province First"
+          }
+
+        </option>
 
 
 
@@ -81,13 +108,32 @@ export default function CitySelect({
             key={city.name}
             value={city.name}
           >
+
             {city.name}
+
           </option>
 
         ))}
 
 
       </select>
+
+
+
+      {error && (
+
+        <p
+          className="
+            text-sm
+            text-red-500
+          "
+        >
+
+          {error}
+
+        </p>
+
+      )}
 
 
     </div>

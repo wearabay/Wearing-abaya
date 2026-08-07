@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import Button from "@/components/ui/Button";
 
@@ -15,12 +16,15 @@ export default function CheckoutActions() {
 
   const router = useRouter();
 
-
   const {
     contact,
     address,
     setErrors,
   } = useCheckout();
+
+
+  const [loading, setLoading] =
+    useState(false);
 
 
 
@@ -46,30 +50,36 @@ export default function CheckoutActions() {
     if (firstError) {
 
 
-      setTimeout(() => {
+      const element =
+        document.getElementById(
+          firstError
+        );
 
 
-        const element =
-          document.getElementById(
-            firstError
-          );
+      if (element) {
+
+        setTimeout(() => {
+
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
 
 
-        if (element) {
+          if (
+            "focus" in element
+          ) {
 
-  element.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-  });
+            (
+              element as HTMLElement
+            ).focus();
 
-  setTimeout(() => {
-    element.focus();
-  }, 500);
+          }
 
-}
 
-      }, 100);
+        }, 100);
 
+      }
 
 
       return;
@@ -78,23 +88,44 @@ export default function CheckoutActions() {
 
 
 
-    router.push(
-      "/checkout/review"
-    );
+    setLoading(true);
+
+
+
+    setTimeout(() => {
+
+      router.push(
+        "/checkout/review"
+      );
+
+    }, 300);
+
 
   }
 
 
 
+
   return (
 
-    <div className="mt-10 flex justify-end">
-
+    <div
+      className="
+        mt-10
+        flex
+        justify-end
+      "
+    >
 
       <Button
         onClick={handleContinue}
+        disabled={loading}
       >
-        Continue to Payment
+
+        {loading
+          ? "Processing..."
+          : "Continue to Payment"
+        }
+
       </Button>
 
 

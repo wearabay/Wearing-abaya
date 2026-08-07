@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import NavbarMenu from "./NavbarMenu";
 import NavbarIcons from "./NavbarIcons";
+import MobileMenu from "./MobileMenu";
 
 import CartDrawer from "@/components/cart/CartDrawer";
 import SearchDrawer from "@/components/search/SearchDrawer";
@@ -112,18 +113,17 @@ const darkNavbar = isTransparentPage
 
 
         <div
-
-          className="
-            mx-auto
-            flex
-            h-20
-            max-w-7xl
-            items-center
-            justify-between
-            px-6
-          "
-
-        >
+  className="
+    mx-auto
+    flex
+    h-20
+    max-w-7xl
+    items-center
+    justify-between
+    px-4
+    sm:px-6
+  "
+>
 
 
           <Logo
@@ -132,25 +132,35 @@ const darkNavbar = isTransparentPage
 
 
 
-          <NavbarMenu
-            dark={darkNavbar}
-          />
+          <div className="hidden md:block">
+  <NavbarMenu
+    dark={darkNavbar}
+  />
+</div>
 
 
+<div className="flex items-center gap-5">
 
-          <NavbarIcons
+  <NavbarIcons
 
-            dark={darkNavbar}
+    dark={darkNavbar}
 
-            onSearchClick={() =>
-              setSearchOpen(true)
-            }
+    onSearchClick={() =>
+      setSearchOpen(true)
+    }
 
-            onCartClick={() =>
-              openCart()
-            }
+    onCartClick={() =>
+      openCart()
+    }
 
-          />
+  />
+
+
+  <MobileMenu
+    dark={darkNavbar}
+  />
+
+</div>
 
 
         </div>

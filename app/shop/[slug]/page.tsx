@@ -1,7 +1,6 @@
 import ReviewList from "@/components/product/reviews/ReviewList";
 import { getProduct } from "@/lib/product";
-import Navbar from "../../../components/layout/Navbar";
-import Footer from "../../../components/layout/Footer";
+
 import Container from "@/components/ui/Container";
 
 import ProductGallery from "@/components/product/gallery/ProductGallery";
@@ -25,20 +24,20 @@ export default async function ProductDetail({ params }: Props) {
   if (!product) {
     return (
       <>
-        <Navbar />
+        
 
         <main className="py-40 text-center">
           <h1 className="text-4xl">Product Not Found</h1>
         </main>
 
-        <Footer />
+        
       </>
     );
   }
 
   return (
     <>
-      <Navbar />
+      
       <ProductTracker slug={product.slug} />
 
       <main className="py-24">
@@ -88,7 +87,7 @@ export default async function ProductDetail({ params }: Props) {
         </Container>
       </main>
 
-      <Footer />
+      
     </>
   );
 }

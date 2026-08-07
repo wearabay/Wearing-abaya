@@ -7,12 +7,14 @@ import {
 
 type ProvinceSelectProps = {
   value: string;
+  error?: string;
   onChange: (value: string) => void;
 };
 
 
 export default function ProvinceSelect({
   value,
+  error,
   onChange,
 }: ProvinceSelectProps) {
 
@@ -39,22 +41,29 @@ export default function ProvinceSelect({
 
 
       <select
+        id="province"
         value={value}
         onChange={(e) =>
           onChange(e.target.value)
         }
-        className="
+        className={`
           h-14
           w-full
           rounded-md
           border
-          border-neutral-300
           bg-white
           px-5
           outline-none
           transition
+
+          ${
+            error
+            ? "border-red-400"
+            : "border-neutral-300"
+          }
+
           focus:border-black
-        "
+        `}
       >
 
         <option value="">
@@ -75,6 +84,13 @@ export default function ProvinceSelect({
 
 
       </select>
+
+
+      {error && (
+        <p className="text-sm text-red-500">
+          {error}
+        </p>
+      )}
 
 
     </div>

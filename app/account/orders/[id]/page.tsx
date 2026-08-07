@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 import Container from "@/components/ui/Container";
 
@@ -31,7 +29,7 @@ export default async function OrderDetailPage({
 
     return (
       <>
-      <Navbar />
+      
 
       <Container className="py-26">
 
@@ -41,14 +39,14 @@ export default async function OrderDetailPage({
 
       </Container>
 
-      <Footer />
+      
       </>
     );
   }
 
   return(
     <>
-    <Navbar />
+    
     <main>
     <Container className="py-24">
       <div className="space-y-10">
@@ -171,7 +169,7 @@ export default async function OrderDetailPage({
     </main>
 
 
-    <Footer />
+    
 
     </>
   );

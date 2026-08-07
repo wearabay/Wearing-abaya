@@ -19,6 +19,7 @@ type Address = {
   country: string;
   province: string;
   city: string;
+  district: string;
   postalCode: string;
   street: string;
   apartment: string;
@@ -33,8 +34,11 @@ export type CheckoutErrors = {
 
   company?: string;
   country?: string;
+
   province?: string;
   city?: string;
+  district?: string;
+
   postalCode?: string;
   street?: string;
   apartment?: string;
@@ -48,6 +52,7 @@ type CheckoutContextType = {
   payment: string;
 
   errors: CheckoutErrors;
+    validateCheckout: () => boolean;
 
   setContact: React.Dispatch<
     React.SetStateAction<Contact>
@@ -85,6 +90,7 @@ const defaultAddress: Address = {
   country: "Indonesia",
   province: "",
   city: "",
+  district: "",
   postalCode: "",
   street: "",
   apartment: "",
@@ -123,6 +129,124 @@ export function CheckoutProvider({
     setErrors({});
   }
 
+    function validateEmail(
+    email: string
+  ) {
+
+    const regex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    return regex.test(email);
+
+  }
+
+
+
+  function validatePhone(
+    phone: string
+  ) {
+
+    const regex =
+      /^(\+62|62|0)8[1-9][0-9]{7,10}$/;
+
+
+    return regex.test(
+      phone.replace(/\s/g, "")
+    );
+
+  }
+
+
+
+  function validateCheckout() {
+
+    const newErrors: CheckoutErrors = {};
+
+
+
+    // Contact
+
+    if (!contact.email) {
+
+      newErrors.email =
+        "Email address is required.";
+
+    } else if (
+      !validateEmail(contact.email)
+    ) {
+
+      newErrors.email =
+        "Please enter a valid email address.";
+
+    }
+
+
+
+    if (!contact.phone) {
+
+      newErrors.phone =
+        "Phone number is required.";
+
+    } else if (
+      !validatePhone(contact.phone)
+    ) {
+
+      newErrors.phone =
+        "Please enter a valid Indonesian phone number.";
+
+    }
+
+
+
+
+
+    // Address
+
+    if (!address.firstName) {
+      newErrors.firstName =
+        "First name is required.";
+    }
+
+
+    if (!address.lastName) {
+      newErrors.lastName =
+        "Last name is required.";
+    }
+
+
+    if (!address.province) {
+      newErrors.province =
+        "Province is required.";
+    }
+
+
+    if (!address.city) {
+      newErrors.city =
+        "City is required.";
+    }
+
+
+    if (!address.postalCode) {
+      newErrors.postalCode =
+        "Postal code is required.";
+    }
+
+
+    if (!address.street) {
+      newErrors.street =
+        "Street address is required.";
+    }
+
+
+
+    setErrors(newErrors);
+
+
+    return Object.keys(newErrors).length === 0;
+
+  }
+
   return (
     <CheckoutContext.Provider
       value={{
@@ -133,6 +257,7 @@ export function CheckoutProvider({
         payment,
 
         errors,
+        validateCheckout,
 
         setContact,
         setAddress,

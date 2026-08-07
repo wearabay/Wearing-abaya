@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 
 import CheckoutHeader from "@/components/checkout/CheckoutHeader";
 
@@ -10,7 +9,7 @@ import PlaceOrder from "@/components/checkout/PlaceOrder";
 export default function ReviewPage() {
   return (
     <>
-      <Navbar />
+      
 
       <main className="mx-auto max-w-[1450px] px-8 py-24">
 
@@ -35,7 +34,7 @@ export default function ReviewPage() {
 
       </main>
 
-      <Footer />
+      
     </>
   );
 }

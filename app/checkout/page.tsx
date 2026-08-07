@@ -1,7 +1,5 @@
 "use client";
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 import Container from "@/components/ui/Container";
 
@@ -20,7 +18,7 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <Navbar />
+      
 
       <Container className="py-24 lg:py-24">
         <CheckoutHeader itemCount={count} />
@@ -49,7 +47,7 @@ export default function CheckoutPage() {
           </aside>
         </div>
       </Container>
-      <Footer />
+      
     </>
   );
 }
