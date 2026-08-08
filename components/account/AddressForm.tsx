@@ -8,9 +8,7 @@ import AddressLabelSelect from "@/components/address/AddressLabelSelect";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import Select from "@/components/ui/Select";
-
-import { districts } from "@/lib/districts";
+import DistrictSelect from "@/components/address/DistrictSelect";
 
 import type { Address } from "@/types/address";
 
@@ -22,7 +20,7 @@ type AddressFormProps = {
 };
 
 const createEmptyAddress = (): Address => ({
-  id: crypto.randomUUID(),
+  id: "",
 
   label: "Home",
 
@@ -236,11 +234,14 @@ export default function AddressForm({
 
   const handleSave = () => {
 
-    if (!validate()) return;
+  if (!validate()) return;
 
-    onSave(form);
+  onSave({
+    ...form,
+    id: form.id || crypto.randomUUID(),
+  });
 
-  };
+};
 
   return (
 
@@ -386,38 +387,18 @@ export default function AddressForm({
           }
         />
 
-        <Select
-          label="District"
-          value={form.district}
-          error={errors.district}
-          onChange={(e) =>
-            updateField(
-              "district",
-              e.target.value
-            )
-          }
-        >
-
-          <option value="">
-            Select District
-          </option>
-
-          {(
-            districts[
-              form.city as keyof typeof districts
-            ] ?? []
-          ).map((item) => (
-
-            <option
-              key={item}
-              value={item}
-            >
-              {item}
-            </option>
-
-          ))}
-
-        </Select>
+        <DistrictSelect
+  province={form.province}
+  city={form.city}
+  value={form.district}
+  error={errors.district}
+  onChange={(value) =>
+    updateField(
+      "district",
+      value
+    )
+  }
+/>
 
       </div>
 

@@ -20,9 +20,17 @@ export function saveAddresses(addresses: Address[]) {
 export function addAddress(address: Address) {
   const addresses = getAddresses();
 
+  const newAddress = {
+    ...address,
+    isDefault:
+      addresses.length === 0
+        ? true
+        : address.isDefault,
+  };
+
   saveAddresses([
     ...addresses,
-    address,
+    newAddress,
   ]);
 }
 
@@ -50,12 +58,3 @@ export function setDefaultAddress(id: string) {
 
   saveAddresses(addresses);
 }
-
-export const districts = {
-  "Pekalongan": [
-    "Pekalongan Barat",
-    "Pekalongan Timur",
-    "Pekalongan Selatan",
-    "Pekalongan Utara"
-  ],
-};
